@@ -1,0 +1,59 @@
+﻿@inject NavigationManager navigationManager
+@inject CookieManagement CookieManager
+@using Newtonsoft.Json;
+@inject ISnackbar Snackbar
+
+
+<MudDialog>
+    <DialogContent>
+        Are you sure you want to disconnect with that user?
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Disconnect">Confirm</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter] public int ID { get; set; }
+    [Parameter] public EventCallback<int> OnDisconnect { get; set; }
+
+    private async void Disconnect()
+    {
+        try
+        {
+            var sessionModel = await CookieManager.GetCookie<UserModel>("LoggedInUserInfo");
+
+            var requestBody = JsonConvert.SerializeObject(new
+            {
+                RequestID = ID,
+                Status = 3,
+                UserID = 0,
+                SenderID = 0,
+            });
+
+            var jsonStr = await CommonMethods.PostDataAsync(requestBody.ToString(), sessionModel.APIKey, sessionModel.SessionKey, "/DSB/UpdateRequestStatus");
+            dynamic result = JsonConvert.DeserializeObject(jsonStr);
+            int returnStatus = result["status"];
+            string returnMessage = result["message"];
+            if (returnStatus == 200)
+            {
+                Snackbar.Add(returnMessage, Severity.Success);
+                await OnDisconnect.InvokeAsync(1);
+
+                MudDialog.Close(DialogResult.Ok(true));
+            }
+            else
+            {
+                Snackbar.Add(returnMessage, Severity.Error);
+            }
+
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, new UserModel());
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

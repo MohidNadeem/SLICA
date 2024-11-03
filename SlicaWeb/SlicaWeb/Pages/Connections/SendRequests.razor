@@ -1,0 +1,119 @@
+﻿@page "/send-requests"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject CookieManagement CookieManager
+@inject NavigationManager NavigationManager
+@inject NotificationService NotificationManager
+@inject IDialogService DialogService
+<PageTitle>Send Requests</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+        <div class="row">
+            <div class="col-12">
+                <MudItem>
+                    <div class="row">
+                        <div class="col-6">
+                            <MudText Class="pa-2" Typo="Typo.h6">Send Requests</MudText>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-2">
+                            <MudSpacer />
+                            <MudItem Style="display:flex;" Class="pa-2">
+                                <MudNavLink Class="pl-lg-4 pl-md-4" Icon="@Icons.Material.Filled.Favorite" Href="/my-connections">My Connections</MudNavLink>
+                            </MudItem>
+                        </div>
+                    </div>
+                </MudItem>
+            </div>
+            <MudDivider />
+
+        </div>
+    </MudItem>
+    <MudItem>
+        <MudText Class="pa-2 pt-6" Typo="Typo.h6">
+            Want to Connect with your Friends?
+        </MudText>
+        <MudText Class="pa-2" Typo="Typo.body1">
+            Here, you can send requests to other users to build your network and you may cancel any pending requests .
+
+
+        </MudText>
+    </MudItem>
+    
+    <div class="row">
+        <div class="col-md-3 col-sm-6 col-xs-6">
+
+            <MudItem Class="pa-2 pt-2">
+                <MudAutocomplete ResetValueOnEmptyText="true" CoerceValue="true" T="string" Label="Search User" @bind-Value="@_userName" SearchFunc="@SearchUser"
+                                 AdornmentIcon="@Icons.Material.Outlined.Search" AdornmentColor="Color.Primary" />
+
+            </MudItem>
+        </div>
+       
+    </div>
+    <MudItem Class="mt-2" xs="12" sm="10" md="10">
+
+        <MudDataGrid Items="@requestDetails" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+                     Hideable="false">
+                      <NoRecordsContent>
+                <MudText Typo="Typo.caption"> No Records.</MudText>
+            </NoRecordsContent>
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Send Requests</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <Columns>
+                <PropertyColumn Property="x => x.SNo" Title="SNo"/>
+                <TemplateColumn Title="Name" >
+                    <CellTemplate>
+                        <MudStack Row>
+                            <MudAvatar>
+                                <MudImage Src="@(!string.IsNullOrEmpty(context.Item.FileName)?"Images/Profile/"+context.Item.FileName:"Images/Profile/noprofile.jpg")"></MudImage>
+                            </MudAvatar>
+                            <MudLink Color="Color.Dark" OnClick="@(()=>OpenBioDialog(context.Item.Bio,context.Item.Name,context.Item.FileName))" Underline="Underline.None">@context.Item.Name</MudLink>
+
+                        </MudStack>
+                    </CellTemplate>
+                    </TemplateColumn>
+                <PropertyColumn Property="x => x.Email" />
+                <TemplateColumn Title="Action" CellClass="d-flex justify-start">
+                    <CellTemplate>
+                        @if (context.Item.Status == "Incoming")
+                        {
+                            <MudIconButton Size="Size.Small" Icon="@Icons.Material.Filled.Check" Color="Color.Dark" OnClick="@(()=>UpdateRequest(context.Item,1))" aria-label="Accept"></MudIconButton>
+                            <MudIconButton Size="Size.Small" Icon="@Icons.Material.Filled.Clear" Color="Color.Dark" OnClick="@(()=>UpdateRequest(context.Item,2))" aria-label="Reject"></MudIconButton>
+                        }
+                        else if (context.Item.Status == "Pending")
+                        {
+                            <MudNavLink OnClick="@(()=>UpdateRequest(@context.Item,4))" Icon="@Icons.Material.Filled.WatchLater">Pending</MudNavLink>
+
+                        }
+                        else if (context.Item.Status == "Connected")
+                        {
+                            <MudNavLink OnClick="@(()=>UpdateRequest(@context.Item,3))" Icon="@Icons.Material.Filled.PersonRemove">Disconnect</MudNavLink>
+
+                        }
+                        else
+                        {
+                            <MudNavLink OnClick="@(()=>UpdateRequest(@context.Item,0))" Icon="@Icons.Material.Filled.PersonAdd">Connect</MudNavLink>
+
+                        }
+
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="RequestModel" />
+            </PagerContent>
+        </MudDataGrid>
+
+    </MudItem>
+
+
+</MudContainer>
+
+
+

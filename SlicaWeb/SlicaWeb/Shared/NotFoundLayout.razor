@@ -1,0 +1,49 @@
+﻿@inherits LayoutComponentBase
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+@using Newtonsoft.Json;
+@inject CookieManagement CookieManager
+<MudThemeProvider Theme="MyCustomTheme" />
+<MudSnackbarProvider />
+<MudDialogProvider />
+
+<MudLayout Class="d-flex flex-column" Style="min-height: 100vh;">
+
+    <MudMainContent>
+        <MudPaper Square="true" Elevation="0">
+            <MudElement HtmlTag="div" Class="d-flex">
+                @Body
+            </MudElement>
+        </MudPaper>
+    </MudMainContent>
+
+    <MudElement HtmlTag="div" Style="height: 30px; border-top: 1px solid #EEEEEE; margin-top: auto;" Class="pl-2 pt-2">
+        <MudText Style="font-size: 11px;">Copyright © 2024 SLICA.</MudText>
+    </MudElement>
+
+</MudLayout>
+@code {
+
+    MudTheme MyCustomTheme = new MudTheme()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = Colors.Shades.Black,
+                Divider = Colors.Shades.Black
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Primary = Colors.Shades.Black,
+                Divider = Colors.Shades.Black,
+            },
+
+        };
+
+}
+<style>
+    .mud-appbar {
+        background-color: black !important;
+    }
+
+</style>
+

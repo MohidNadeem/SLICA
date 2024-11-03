@@ -1,0 +1,88 @@
+﻿@page "/chat"
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject CookieManagement CookieManager
+@inject NotificationService NotificationManager
+<div class="d-flex flex-grow-1 flex-row">
+    <MudPaper Elevation="25" Class="py-4 flex-grow-1">
+        <MudToolBar Dense="true">
+            @if (currentChatUser != null)
+            {
+                <MudAvatar>
+                    <MudImage Src="@(!string.IsNullOrEmpty(currentChatUser.FileName)?"Images/Profile/"+currentChatUser.FileName:"Images/Profile/noprofile.jpg")"></MudImage>
+                </MudAvatar>
+                @:&nbsp; &nbsp;
+                <MudText Typo="Typo.h6">@(currentChatUser.FirstName+ " "+currentChatUser.LastName)</MudText>
+            }
+            
+        </MudToolBar>
+        <div class="d-flex flex-column px-4" style="max-height:65vh;min-height:65vh; overflow:scroll;" id="chatContainer">
+            @foreach (var message in messages)
+            {
+                <div class="d-flex flex-row my-4">
+                    <div class="mr-4">
+                        @if(sessionModel.Id == message.SenderID)
+                        {
+                            <MudAvatar Color="Color.Primary" Style="height:70px; width:70px;">You</MudAvatar>
+
+                        }
+                        else
+                        {
+                            <MudAvatar Color="Color.Secondary" Style="height:70px; width:70px;">@(message.SenderFirstName.ToUpper().Substring(0, 1) + message.SenderLastName.ToUpper().Substring(0, 1))</MudAvatar>
+
+                        }
+                    </div>
+                    <div>
+
+                        <MudText Typo="Typo.body1">@(message.SenderFirstName +" "+message.SenderLastName)</MudText>
+                        <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@message.CreatedDate.ToString("dd-MMM-yyyy HH:mm")</MudText>
+                        <MudText Typo="Typo.body2" Style=" padding: 15px;background-color: var(--mud-palette-background-grey);border-radius: 5px;margin-top:5px">@message.Message</MudText>
+                    </div>
+                </div>
+            }
+        </div>
+        @if(currentChatUser != null)
+        {
+        <MudPaper Elevation="25" Class="d-flex flex-row px-2 mx-4" Style="">
+            <MudTextField T="string" Placeholder="Enter your message..." DisableUnderLine="true" Class="mt-n2 mx-4"
+                          @bind-Value="CurrentMessage" For="@(()=> CurrentMessage)" />
+            <MudButton OnClick="SubmitAsync" StartIcon="@Icons.Material.Outlined.Send" Color="Color.Secondary" ButtonType="ButtonType.Button">Send</MudButton>
+        </MudPaper>
+        }
+    </MudPaper>
+    <MudPaper Elevation="25" Class="pa-3 ml-6" MinWidth="350px">
+        <MudToolBar Dense="true">
+            <MudText Typo="Typo.h6">Connects</MudText>
+        </MudToolBar>
+        <div class="d-flex flex-column px-4" style="max-height:70vh;min-height:70vh; overflow:scroll;">
+            <MudList Clickable="true">
+                @foreach (var user in connectedUsers)
+                {
+                    <MudListItem Class="pa-0 px-2" OnClick="@(() => LoadUserChat(user))">
+                        <div class="d-flex flex-row mt-n1 mb-n1">
+                            <div class="mr-4">
+                                    @if (currentChatUser != null && user.Id == currentChatUser.Id)
+                                    {
+                                        <MudAvatar Color="Color.Secondary">
+                                            <MudImage Src="@(!string.IsNullOrEmpty(user.FileName)?"Images/Profile/"+user.FileName:"Images/Profile/noprofile.jpg")"></MudImage>
+                                        </MudAvatar>
+@*                                         <MudAvatar Color="Color.Secondary" Style="height:70px; width:70px;">@(user.FirstName.ToUpper().FirstOrDefault() + user.LastName.ToUpper().FirstOrDefault())</MudAvatar>
+ *@                                    }
+                                    else
+                                    {
+                                        <MudAvatar Color="Color.Dark">
+                                            <MudImage Src="@(!string.IsNullOrEmpty(user.FileName)?"Images/Profile/"+user.FileName:"Images/Profile/noprofile.jpg")"></MudImage>
+                                        </MudAvatar>
+                                 }
+                            </div>
+                            <div>
+                                <MudText Typo="Typo.body2" Class="mt-3 mb-n2">@(user.FirstName + " " + user.LastName)</MudText>
+@*                                 <MudText Typo="Typo.caption" Style="font-size: xx-small!important;">@user.Id</MudText>
+ *@                            </div>
+                        </div>
+                    </MudListItem>
+                }
+            </MudList>
+        </div>
+    </MudPaper>
+</div>

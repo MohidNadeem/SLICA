@@ -1,0 +1,248 @@
+﻿@page "/dashboard"
+@inject ISnackbar Snackbar
+@inject CookieManagement CookieManager
+@inject NavigationManager NavigationManager
+@inject NotificationService NotificationManager
+@using Blazored.Video;
+<PageTitle>Dashboard</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <div class="row" style="margin-top:3rem;">
+    <MudItem md="4" lg="4" xl="4" sm="10" xs="10">
+            <MudCard >
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Total Connections</MudText>
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudIconButton Style="color:#424242" Icon="@Icons.Material.Filled.Favorite" Color="Color.Default" />
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText Style="margin-left:2rem;" Typo="Typo.h3">@dashboardDetails.TotalConnections</MudText><MudText Style="margin-left:3rem;" Typo="Typo.body1">Connection(s)</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Href="/send-requests" Variant="Variant.Text" Color="Color.Primary">Extend Network</MudButton>
+                </MudCardActions>
+            </MudCard>
+    </MudItem>
+        <MudItem md="4" lg="4" xl="4" sm="10" xs="10">
+            <MudCard>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Total Request</MudText>
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudIconButton Style="color:#424242" Icon="@Icons.Material.Filled.Update" Color="Color.Default" />
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText Style="margin-left:2rem;" Typo="Typo.h3">@dashboardDetails.TotalRequests</MudText><MudText Style="margin-left:3rem;" Typo="Typo.body1">Request(s)</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Href="/connection-requests" Variant="Variant.Text" Color="Color.Primary">Take Action</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+    <MudItem md="4" lg="4" xl="4" sm="10" xs="10">
+            <MudCard>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Upcoming Meetings</MudText>
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudIconButton Style="color:#424242" Icon="@Icons.Material.Filled.Videocam" Color="Color.Default" />
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent>
+                    <MudText Style="margin-left:2rem;" Typo="Typo.h3">@dashboardDetails.TotalMeetings</MudText><MudText Style="margin-left:3rem;" Typo="Typo.body1">Meeting(s)</MudText>
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Href="/meeting-hub" Variant="Variant.Text" Color="Color.Primary">Meeting Hub</MudButton>
+                </MudCardActions>
+            </MudCard>
+    </MudItem>
+        
+    </div>
+      <div class="row" style="margin-top:5rem;" hidden="true">
+        <MudItem md="6" lg="6" xl="6" sm="12" xs="12">
+
+            <MudCalendar Items="dashboardDetails.Events" Color="Color.Dark" DayTimeInterval="CalendarTimeInterval.Minutes15" MonthCellMinHeight="0">
+                <CellTemplate>
+                    @if (((CustomCalendarItem)context).Status == "Missed")
+                    {
+                        <div style="width: 100%; height: 100%; border: 2px solid @GetColor(Color.Error)">
+                            <div style="background-color: @GetColor(Color.Error)"><MudText Style="color: #ffffff;" Typo="Typo.body1" Align="Align.Center">@(((CustomCalendarItem)context).Text)</MudText></div>
+                        </div>
+                    }
+                    else if (((CustomCalendarItem)context).Status == "Leaved")
+                    {
+                        <div style="width: 100%; height: 100%; border: 2px solid @GetColor(Color.Success)">
+                            <div style="background-color: @GetColor(Color.Success)"><MudText Style="color: #ffffff;" Typo="Typo.body1" Align="Align.Center">@(((CustomCalendarItem)context).Text)</MudText></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div style="width: 100%; height: 100%; border: 2px solid @GetColor(Color.Primary)">
+                            <div style="background-color: @GetColor(Color.Primary)"><MudText Style="color: #ffffff;" Typo="Typo.body2" Align="Align.Center">@(((CustomCalendarItem)context).Text)</MudText></div>
+                        </div>
+
+                    }
+
+                </CellTemplate>
+            </MudCalendar>
+
+
+
+        </MudItem>
+    <MudItem md="3" lg="3" xl="3" sm="12" xs="12">
+            <MudCard>
+                <MudCardHeader>
+                    <CardHeaderContent>
+                        <MudText Typo="Typo.h6">Word of the Day</MudText>
+                    </CardHeaderContent>
+                    <CardHeaderActions>
+                        <MudIconButton Style="color:#424242" Icon="@Icons.Material.Filled.Today" Color="Color.Default" />
+                    </CardHeaderActions>
+                </MudCardHeader>
+                <MudCardContent Class="text-center">
+                    @if (dashboardDetails.DayVideo != null)
+                    {
+
+
+                        <BlazoredVideo @key="@("VideosData/"+dashboardDetails.DayVideo.Link)" style="width:80%; border-radius: 10px;" controls="controls">
+                            <source src="@("VideosData/"+dashboardDetails.DayVideo.Link)" type="video/mp4" />
+                        </BlazoredVideo>
+                        <hr style="margin: 10px 0;">
+                        <div style="display: flex; align-items: center; justify-content: center;">
+
+                            <MudText Style="margin-top: 5px; text-align: center;  font-size: 22px; text-transform: uppercase;" Typo="Typo.body2"> @dashboardDetails.DayVideo.Name</MudText>
+                        </div>
+                    }
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton Href="/learning-Words" Variant="Variant.Text" Color="Color.Primary">Watch More</MudButton>
+                </MudCardActions>
+            </MudCard>
+
+            @* <MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+                <MudTabPanel Text="Recent Meetings">
+                    <MudTable Hover="true" HorizontalScrollbar="true" Items="@dashboardDetails.RecentMeetings">
+                        <NoRecordsContent>
+                            <MudText Typo="Typo.caption"> No Recent Meetings.</MudText>
+                        </NoRecordsContent>
+                        <HeaderContent>
+                            <MudTh>SNo</MudTh>
+                            <MudTh>Code</MudTh>
+                            <MudTh>Title</MudTh>
+                            <MudTh>Host</MudTh>
+                            <MudTh>Participant(s)</MudTh>
+                            <MudTh>Date</MudTh>
+                            <MudTh>StartTime</MudTh>
+                            <MudTh>EndTime</MudTh>
+                            <MudTh>Duration</MudTh>
+                            <MudTh>Status</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd>@context.SNo</MudTd>
+                            <MudTd>@context.Code</MudTd>
+                            <MudTd>@context.Title</MudTd>
+                            <MudTd>@context.Host</MudTd>
+                            <MudTd>@context.Participant</MudTd>
+                            @if(context.Date.HasValue)
+                            {
+                                <MudTd>@context.Date.Value.ToString("dd-MMM-yyyy")</MudTd>
+                            }
+                            else
+                            {
+                               <MudTd></MudTd>                               
+                            }
+                            @if (context.StartTime.HasValue)
+                            {
+                              <MudTd>@context.StartTime.Value.ToString("hh:mm tt")</MudTd>
+                                
+                            }
+                            else
+                            {
+                            <MudTd></MudTd>
+                            }
+                            @if (context.EndTime.HasValue)
+                            {
+                                <MudTd>@context.EndTime.Value.ToString("hh:mm tt")</MudTd>
+                                
+                            }
+                            else
+                            {
+                                <MudTd></MudTd>
+                            }
+                            <MudTd>@context.Duration</MudTd>
+                            <MudTd>@context.Status</MudTd>
+
+                        </RowTemplate>
+                         
+                    </MudTable>
+
+                </MudTabPanel>
+                <MudTabPanel Text="Recent Requests">
+                    <MudTable Hover="true" HorizontalScrollbar="true" Items="@dashboardDetails.RecentRequests">
+
+                        <NoRecordsContent>
+                            <MudText Typo="Typo.caption"> No Recent Requests.</MudText>
+                        </NoRecordsContent>
+                        <HeaderContent>
+                            <MudTh>SNo</MudTh>
+                            <MudTh>Name</MudTh>
+                            <MudTh>Email</MudTh>
+                            <MudTh>Received Date</MudTh>
+                            <MudTh>Action</MudTh>
+                        </HeaderContent>
+                        <RowTemplate>
+                            <MudTd>@context.SNo</MudTd>
+                            <MudTd>@context.Name</MudTd>
+                            <MudTd>@context.Email</MudTd>
+                            <MudTd>@context.ReceivedDate.Value.ToString("dd-MMM-yyyy")</MudTd>
+                            <MudTd>
+
+                                <MudIconButton Size="Size.Small" Icon="@Icons.Material.Filled.Check" Color="Color.Dark" OnClick="@(()=>UpdateRequest(context,1))" aria-label="Accept"></MudIconButton>
+                                <MudIconButton Size="Size.Small" Icon="@Icons.Material.Filled.Clear" Color="Color.Dark" OnClick="@(()=>UpdateRequest(context,2))" aria-label="Reject"></MudIconButton>
+
+                            </MudTd>
+                        </RowTemplate>
+
+                    </MudTable>
+
+                </MudTabPanel>
+
+            </MudTabs> *@
+           
+    </MudItem>
+
+    
+        <MudItem md="3" lg="3" xl="3" sm="12" xs="12">
+            <MudTable Hover="true" HorizontalScrollbar="true" Items="@dashboardDetails.Leaderboard">
+                <ToolBarContent>
+                    <MudText Typo="Typo.h6">Leaderboard</MudText>
+
+                </ToolBarContent>
+                <NoRecordsContent>
+                    <MudText Typo="Typo.caption"> No Records.</MudText>
+                </NoRecordsContent>
+                <HeaderContent>
+                    <MudTh>#</MudTh>
+                    <MudTh>Name</MudTh>
+                    <MudTh>Points</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>@context.Rank</MudTd>
+                    <MudTd>@context.Name</MudTd>
+                    <MudTd>@context.Points</MudTd>
+                    
+                </RowTemplate>
+
+            </MudTable>
+        </MudItem>
+          </div>
+</MudContainer>
+@code {
+
+    
+}

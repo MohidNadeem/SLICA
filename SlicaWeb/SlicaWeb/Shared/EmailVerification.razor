@@ -1,0 +1,118 @@
+﻿@page "/email-verification"
+@layout EmptyLayout;
+@using SlicaWeb.Common
+@using System.ComponentModel.DataAnnotations;
+@using SlicaWeb.Services;
+@using SlicaWeb.Models
+@using Newtonsoft.Json;
+@using JsonSerializer = System.Text.Json.JsonSerializer;
+@using Microsoft.AspNetCore.DataProtection.KeyManagement;
+@using JsonException = Newtonsoft.Json.JsonException;
+@using Microsoft.AspNetCore.Mvc;
+
+
+@inject NavigationManager navigationManager;
+@inject NotificationService notificationManager
+@inject IDialogService DialogService
+@inject CookieManagement CookieManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Email Verification - SLICA</PageTitle>
+
+
+@code
+{
+    #region Classes Object
+    HttpClient? objHttpClient = new HttpClient();
+    UserModel? sessionModel = new UserModel();
+    #endregion
+
+    #region Class Functions
+
+    #region Overridden Functions
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            sessionModel = await CookieManager.GetCookie<UserModel>("LoggedInUserInfo");
+            if (sessionModel == null)
+            {
+                navigationManager.NavigateTo("/");
+            }
+            else
+            {
+
+                await VerifyEmail();
+            }
+        }
+    }
+
+    #endregion
+
+
+
+
+    #region Email Verification
+    private async Task VerifyEmail()
+    {
+        try
+        {
+            string requestBody = JsonConvert.SerializeObject(new
+            {
+                UserID = sessionModel!.Id,
+                EmailID = sessionModel.Email
+            });
+            var response = await CommonMethods.PostDataAsync(requestBody.ToString(), sessionModel!.APIKey, sessionModel!.SessionKey, "/ACC/ValidateSession");
+
+            dynamic responseJson = JsonConvert.DeserializeObject(response)!;
+
+
+
+            int returnStatus = responseJson!["status"];
+            string returnMessage = responseJson["message"];
+
+
+            if (returnStatus != 200)
+            {
+                await CookieManager.DeleteCookie("LoggedInUserInfo");
+                navigationManager.NavigateTo("/");
+
+            }
+            else
+            {
+                bool emailVerificationStatus = (Boolean)responseJson["emailverification"];
+                sessionModel.IsEmailVerified = emailVerificationStatus;
+                await CookieManager.SetCookie("LoggedInUserInfo", sessionModel);
+                if (sessionModel.IsEmailVerified != true)
+                {
+                    var parameters = new DialogParameters();
+                    var options = new MudBlazor.DialogOptions() { FullWidth = true, MaxWidth = MaxWidth.Medium, CloseOnEscapeKey = false, DisableBackdropClick = true };
+                    DialogService.Show<EmailVerificationDialog>("Simple Dialog", parameters, options);
+                }
+                else
+                {
+                    navigationManager.NavigateTo("/dashboard");
+
+                }
+
+
+
+               
+            }
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, sessionModel);
+
+        }
+
+    }
+
+
+   
+
+    #endregion
+    #endregion
+
+
+}

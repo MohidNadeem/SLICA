@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SLICAWebAPI", "SLICAWebAPI.csproj", "{F7DD0E46-CCC3-4E06-8D8E-FF343E590026}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7DD0E46-CCC3-4E06-8D8E-FF343E590026}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7DD0E46-CCC3-4E06-8D8E-FF343E590026}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7DD0E46-CCC3-4E06-8D8E-FF343E590026}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7DD0E46-CCC3-4E06-8D8E-FF343E590026}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {733E2598-107E-4E1A-9B0F-855850F07777}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://dev.azure.com/slica
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = SLICAWebAPI.csproj
+		SccLocalPath1 = .
+	EndGlobalSection
+EndGlobal

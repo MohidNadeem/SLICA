@@ -1,0 +1,33 @@
+﻿<MudDialog>
+    <DialogContent>
+        <div class="row">
+            <div class="offset-3 col-sm-10 col-md-6 col-lg-6 col-xl-6 col-xs-12">
+                <MudImage ObjectFit="ObjectFit.Fill" Height="200" Width="250" Src="@(!string.IsNullOrEmpty(FileName) ? "Images/Profile/"+FileName:"Images/Profile/noprofile.jpg")" Alt="Profile Photo" Elevation="25" Class="rounded-circle" />
+           </div>
+        </div>
+        <div class="row">
+
+            <div class="offset-3 col-sm-10 col-md-6 col-lg-6 col-xl-6 col-xs-12">
+                <MudText Typo="Typo.h6">@Name</MudText>
+            </div>
+                   </div>
+        <div class="row">
+
+            <div class="offset-3 col-sm-10 col-md-6 col-lg-6 col-xl-6 col-xs-12">
+                <MudText Typo="Typo.body1">@Bio</MudText>
+            </div>
+        </div>
+    </DialogContent>
+
+
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    [Parameter]
+    public string FileName { get; set; }
+    [Parameter]
+    public string Name { get; set; } = "";
+    [Parameter]
+    public string Bio { get; set; } = "";
+
+}

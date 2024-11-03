@@ -1,0 +1,134 @@
+﻿@page "/user-profile"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject CookieManagement CookieManager
+@inject NotificationService NotificationManager
+
+<PageTitle>User Profile</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+    <div  class="row">
+        <div class="col-12">
+            <MudItem>
+                <div class="row">
+                    <div class="col-6">
+                    <MudText Class="pa-2" Typo="Typo.h6">User Profile</MudText>
+                    </div>
+                    <div class="col-1">
+
+                    </div>
+                   <div class="col-5">
+                    <MudSpacer />
+                    <MudItem Style="display:flex;" Class="pa-2">
+                        <MudNavLink Disabled="@boolean" OnClick="Save" Icon="@Icons.Material.Filled.Save">Save Profile</MudNavLink>
+
+                        <MudNavLink OnClick="OpenPasswordDialog" Icon="@Icons.Material.Filled.Lock">Change Password</MudNavLink>
+
+                        <MudNavLink Class="pl-lg-4 pl-md-4" OnClick="OpenDialog" Icon="@Icons.Material.Filled.Delete">Delete Profile</MudNavLink>
+                    </MudItem>
+                    </div>
+                    </div>
+            </MudItem>
+        </div>
+        <MudDivider />
+
+    </div>
+     </MudItem>
+
+    <MudItem>
+        <div class="row">
+            <div class="col-6">
+                  <EditForm EditContext="userProfileContext">
+                                <DataAnnotationsValidator />
+                                       <div class="row">
+                        @if (!string.IsNullOrEmpty(profileUser.FileName))
+                        {
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xl-6 offset-4">
+
+                            <MudButton OnClick="RemovePhoto">Remove Picture</MudButton>
+                            </div>
+                        }
+                        </div>
+                                <div class="row">
+                        
+                                    <div class="col-md-6 col-lg-6 col-sm-12 col-xl-6 offset-3">
+                            <MudImage ObjectFit="ObjectFit.Fill"  Height="200" Width="250" Src="@(!string.IsNullOrEmpty(profileUser.FileName) ? "Images/Profile/"+profileUser.FileName:"Images/Profile/noprofile.jpg")" Alt="Profile Photo" Elevation="25" Class="rounded-circle" />
+                            
+                                    </div>
+                        <div class="col-md-4 col-lg-4 col-sm-12 col-xl-4">
+
+
+                            <div class="input-group mb-3">
+                               
+                                <div class="custom-file d-inline-flex">
+                                    <InputFile OnChange="SelectFiles" accept=".jpg,.png,.jpeg"></InputFile>
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+                                </div>
+                             <div class="row">  
+                <div class="col-md-6 col-lg-6 col-sm-12 col-xl-6">
+
+                    <MudItem Class="pa-4">
+                                <MudTextField Class="black-border" For="@(() => profileUser.FirstName)" @bind-Value="@profileUser.FirstName" Label="First Name" InputType="InputType.Text" />
+                    </MudItem>
+                </div>
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xl-6">
+
+                        <MudItem Class="pa-4">
+                            <MudTextField   Class="black-border" For="@(() => profileUser.LastName)" @bind-Value="@profileUser.LastName" Label="Last Name" InputType="InputType.Text" />
+                        </MudItem>
+                    </div>
+                    </div>
+                    <div class="row">
+                    <div class="col-md-6 col-lg-6 col-sm-12 col-xl-6">
+
+                        <MudItem Class="pa-4">
+                            <MudTextField   Class="black-border" For="@(() => profileUser.Email)" @bind-Value="@profileUser.Email" Label="Email" InputType="InputType.Email" />
+                        </MudItem>
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+
+                        <MudItem Class="pa-4">
+
+                                <MudTextField T="string" Class="black-border" MaxLength="500" Label="Bio" Variant="Variant.Text" For="@(()=>profileUser.Bio)" @bind-Value="@profileUser.Bio" AutoGrow Lines="4" HelperText="Add About yourself here" />
+                        </MudItem>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+
+        </div>
+    </MudItem>
+
+    <MudItem Class="pa-2">
+        <div class="row">
+            <div class="col-6" style="display:inline-flex;">
+                <MudTooltip Class="pa-2" Placement="Placement.Top">
+                    <ChildContent>
+                        <MudText Typo="Typo.subtitle1" Style="display:inline-flex;">
+                            Two-Factor Authentication
+                        </MudText>
+                    </ChildContent>
+                    <TooltipContent>
+                        <MudElement HtmlTag="div" Style="width:250px;">
+                        <MudText Align="Align.Left" Typo="Typo.overline">h6 Two-factor authenitcator adds a second layer of security to your account to prevent unauthorized access.</MudText>
+                        </MudElement>
+                    </TooltipContent>
+                </MudTooltip>
+                
+                    <div class="col-2" style="margin-top:-0.2rem;">
+                    <MudSwitch T="bool" Checked="IsTwoFactor" CheckedChanged="@(async (IsTwoFactor) => await UpdateTwoFactorValue(IsTwoFactor))" Class="pl-6" Color="Color.Primary" />
+                     
+                    </div>
+                    
+            </div>
+           
+        </div>
+    </MudItem>
+</MudContainer>

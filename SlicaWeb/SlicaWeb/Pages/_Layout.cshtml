@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Components.Web
+@namespace SlicaWeb.Pages
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="~/" />
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css" />
+    <link href="css/site.css" rel="stylesheet" />
+    <link href="SlicaWeb.styles.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="_content/MudBlazor/MudBlazor.min.css" rel="stylesheet" />
+    <component type="typeof(HeadOutlet)" render-mode="ServerPrerendered" />
+    <link href="_content/Heron.MudCalendar/Heron.MudCalendar.min.css" rel="stylesheet" />
+    @* <script>
+        const weavy = new Weavy();
+        // url to your Weavy environment
+        weavy.url = "https://1f7e7af91d7a465cba2680d23048248f.weavy.io";
+        // token factory that returns the access_token for your demo user
+        weavy.tokenFactory = async () => "wyu_DdqubeYfUL1CHRIN8C699IGof77pv13r7LHK";
+    </script> *@
+    <script src="https://download.agora.io/sdk/release/AgoraRTC_N.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js" asp-append-version="true"></script>
+    <script src="https://cdn.jsdelivr.net/npm/agora-rtm-sdk@1.5.1/index.js" asp-append-version="true"></script>
+
+</head>
+<body>
+    @RenderBody()
+
+    <div id="blazor-error-ui">
+        <environment include="Staging,Production">
+            An error has occurred. This application may no longer respond until reloaded.
+        </environment>
+        <environment include="Development">
+            An unhandled exception has occurred. See browser dev tools for details.
+        </environment>
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+
+    <script src="_framework/blazor.server.js"></script>
+    <script src="_content/MudBlazor/MudBlazor.min.js"></script>
+    <script src="~/js/cookies.js"></script>
+    <script src="~/js/scroll.js"></script>
+    <script src="_content/Heron.MudCalendar/Heron.MudCalendar.min.js"></script>
+</body>
+</html>

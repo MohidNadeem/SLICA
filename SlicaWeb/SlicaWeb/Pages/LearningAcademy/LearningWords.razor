@@ -1,0 +1,250 @@
+﻿@page "/learning-Words"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject NavigationManager navigationManager;
+@inject CookieManagement CookieManager
+@using Blazored.Video
+@using Blazored.Video.Support
+@using MudBlazor
+@using System.ComponentModel.DataAnnotations
+<PageTitle>Learning Academy</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+        <div class="row">
+            <div class="col-12">
+                <MudItem>
+                    <div class="row">
+                        <div class="col-6">
+                            <MudText Class="pa-2" Typo="Typo.h6">Learning Academy</MudText>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-2">
+                            <MudSpacer />
+                            <MudItem Style="display:flex;" Class="pa-2">
+@*                                 <MudNavLink Class="pl-lg-4 pl-md-4" Icon="@Icons.Material.Filled.CheckCircle">Test Yourself</MudNavLink>
+ *@                            </MudItem>
+                        </div>
+                    </div>
+                </MudItem>
+            </div>
+            <MudDivider />
+
+        </div>
+    </MudItem>
+    <MudItem>
+        <MudText Class="pa-2 pt-6" Typo="Typo.h6">
+            Welcome to the Learning Center | Master the Language of Motion
+        </MudText>
+        <MudText Class="pa-2" Typo="Typo.body1">
+            Learn the American Sign Language Gestures for  the English Language words from our Popular Words Collection and intuitive Search Feature. "For You" section has recommendations for you to learn based on what you watch and like the most. Moreover, you can also look back to videos you have liked under Liked Videos section.
+        </MudText>
+    </MudItem>
+    <MudDivider/>
+    
+        <MudExpansionPanels>
+            <MudExpansionPanel>
+                <TitleContent>
+                    <div class="d-flex">
+
+                       <MudIcon Icon="@Icons.Material.Filled.TrendingUp" Class="mr-3"></MudIcon>
+                        <MudText><strong>Popular</strong></MudText>
+                    </div>
+                </TitleContent>
+                <ChildContent>
+                @foreach (var item in popularVideos)
+                {
+                    <MudItem Class="d-xl-inline-flex d-lg-inline-flex d-md-inline-flex d-sm-inline-flex d-xs-inline-flex " style="margin:auto">
+                        <MudCard Style="margin:3%; max-width: 400px; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                            <MudCardContent Class="text-center">
+                                <BlazoredVideo @key="@("VideosData/"+item.Link)" style="width:80%; border-radius: 10px;" controls="controls" EndedEvent="@(()=>UpdateVideoView(item.Id))">
+                                    <source src="@("VideosData/"+item.Link)" type="video/mp4" />
+                                </BlazoredVideo>
+                                <hr style="margin: 10px 0;">
+                                <div style="display: flex; align-items: center; justify-content: center;">
+
+                                    <MudText Style="margin-top: 5px; text-align: center;  font-size: 22px; text-transform: uppercase;" Typo="Typo.body2"> @item.Name</MudText>
+                                </div>
+
+                                <div style="display: flex; align-items: center;margin-left:5rem; justify-content: space-between;">
+                                   
+                                    <div class="text-center" style="display: flex; align-items: center;">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Visibility" Class="mr-2" />
+                                        <MudText Typo="Typo.body2">@item.Views Views</MudText>
+                                        <MudIconButton OnClick="@(()=>UpdateVideoLike(item.Id,item.IsLike))" Icon="@(item.IsLike ? @Icons.Material.Outlined.Favorite :  Icons.Material.Outlined.FavoriteBorder)" />
+
+                                                                        <MudText Typo="Typo.body2">@item.Likes Likes</MudText>
+                                    </div>
+                                    
+                                </div>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }   
+
+                @if (popularVideos.Count == 0)
+                {
+                    <MudText Style="text-align: center; margin-top: 20px;">No video found</MudText>
+                }
+            </ChildContent>
+
+            </MudExpansionPanel>
+
+            <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.OndemandVideo" Class="mr-3"></MudIcon>
+
+                    <MudText><strong>For You</strong></MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                @foreach (var item in foryouVideos)
+                {
+                    <MudItem Class="d-xl-inline-flex d-l-inline-flex d-md-inline-flex d-sm-inline-flex d-xs-inline-flex " style="margin:auto">
+                        <MudCard Style="margin:3%; max-width: 400px; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                            <MudCardContent Class="text-center">
+                                <BlazoredVideo @key="@("VideosData/"+item.Link)" style="width:80%; border-radius: 10px;" controls="controls" EndedEvent="@(()=>UpdateVideoView(item.Id))">
+                                    <source src="@("VideosData/"+item.Link)" type="video/mp4" />
+                                </BlazoredVideo>
+                                <hr style="margin: 10px 0;">
+                                <div style="display: flex; align-items: center; justify-content: center;">
+
+                                    <MudText Style="margin-top: 5px; text-align: center;  font-size: 22px; text-transform: uppercase;" Typo="Typo.body2"> @item.Name</MudText>
+                                </div>
+
+                                <div style="display: flex; align-items: center;margin-left:5rem; justify-content: space-between;">
+
+                                    <div style="display: flex; align-items: center;">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Visibility" Class="mr-2" />
+                                        <MudText Typo="Typo.body2">@item.Views Views</MudText>
+                                        <MudIconButton OnClick="@(()=>UpdateVideoLike(item.Id,item.IsLike))" Icon="@(item.IsLike ? @Icons.Material.Outlined.Favorite :  Icons.Material.Outlined.FavoriteBorder)" />
+
+                                        <MudText Typo="Typo.body2">@item.Likes Likes</MudText>
+                                    </div>
+                                </div>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }
+                @if (foryouVideos.Count == 0)
+                {
+                    <MudText Style="text-align: center; margin-top: 20px;">No video found</MudText>
+                }
+            </ChildContent>
+
+        </MudExpansionPanel>
+
+            <MudExpansionPanel>
+            <TitleContent>
+                <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Filled.Favorite" Class="mr-3"></MudIcon>
+
+                    <MudText><strong>Liked Videos</strong></MudText>
+                </div>
+            </TitleContent>
+            <ChildContent>
+                @foreach (var item in likedVideos)
+                {
+                    <MudItem Class="d-xl-inline-flex d-l-inline-flex d-md-inline-flex d-sm-inline-flex d-xs-inline-flex " style="margin:auto">
+                        <MudCard Style="margin:3%; max-width: 400px; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                            <MudCardContent Class="text-center">
+
+                                <BlazoredVideo @key="@("VideosData/"+item.Link)" style="width:80%; border-radius: 10px;" controls="controls" EndedEvent="@(()=>UpdateVideoView(item.Id))">
+                                    <source src="@("VideosData/"+item.Link)" type="video/mp4" />
+                                </BlazoredVideo>
+                                <hr style="margin: 10px 0;">
+                                <div style="display: flex; align-items: center; justify-content: center;">
+
+                                    <MudText Style="margin-top: 5px; text-align: center;  font-size: 22px; text-transform: uppercase;" Typo="Typo.body2"> @item.Name</MudText>
+                                </div>
+
+                                <div style="display: flex; align-items: center;margin-left:5rem; justify-content: space-between;">
+
+                                    <div style="display: flex; align-items: center;">
+                                        <MudIcon Icon="@Icons.Material.Outlined.Visibility" Class="mr-2" />
+                                        <MudText Typo="Typo.body2">@item.Views Views</MudText>
+                                        <MudIconButton OnClick="@(()=>UpdateVideoLike(item.Id,item.IsLike))" Icon="@(item.IsLike ? @Icons.Material.Outlined.Favorite :  Icons.Material.Outlined.FavoriteBorder)" />
+
+                                        <MudText Typo="Typo.body2">@item.Likes Likes</MudText>
+                                    </div>
+                                </div>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                }
+                @if (likedVideos.Count == 0)
+                {
+                    <MudText Style="text-align: center; margin-top: 20px;">No video found</MudText>
+                }
+            </ChildContent>
+
+        </MudExpansionPanel>
+
+
+            <MudExpansionPanel MaxHeight="1500">
+            <TitleContent>
+               <div class="d-flex">
+                    <MudIcon Icon="@Icons.Material.Outlined.Search" Class="mr-3"></MudIcon>
+
+                   <MudText><strong>Search Words</strong></MudText>
+                </div>
+               
+               
+            </TitleContent>
+            <ChildContent>
+                    <MudItem xs="12" sm="6" md="4">
+
+                    <MudAutocomplete ResetValueOnEmptyText="true" CoerceValue="true" T="string" Label="Search" @bind-Value="@value2" SearchFunc="Search2"
+                    AdornmentIcon="@Icons.Material.Outlined.Search" AdornmentColor="Color.Dark"/>
+
+
+                    @foreach (var item in searchVideos)
+                    {
+                        <MudItem Class="d-xl-inline-flex d-l-inline-flex d-md-inline-flex d-sm-inline-flex d-xs-inline-flex " style="margin:auto">
+                            <MudCard Style="margin:3%; max-width: 400px; background-color: #f5f5f5; border-radius: 10px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);">
+                                <MudCardContent Class="text-center">
+
+                                    <BlazoredVideo @key="@("VideosData/"+item.Link)" style="width:80%; border-radius: 10px;" controls="controls" EndedEvent="@(()=>UpdateVideoView(item.Id))">
+                                        <source src="@("VideosData/"+item.Link)" type="video/mp4" />
+                                    </BlazoredVideo>
+                                    <hr style="margin: 10px 0;">
+                                    <div style="display: flex; align-items: center; justify-content: center;">
+
+                                        <MudText Style="margin-top: 5px; text-align: center;  font-size: 22px; text-transform: uppercase;" Typo="Typo.body2"> @item.Name</MudText>
+                                    </div>
+
+                                    <div style="display: flex; align-items: center;margin-left:5rem; justify-content: space-between;">
+
+                                        <div style="display: flex; align-items: center;">
+                                            <MudIcon Icon="@Icons.Material.Outlined.Visibility" Class="mr-2" />
+                                            <MudText Typo="Typo.body2">@item.Views Views</MudText>
+                                            <MudIconButton OnClick="@(()=>UpdateVideoLike(item.Id,item.IsLike))" Icon="@(item.IsLike ? @Icons.Material.Outlined.Favorite :  Icons.Material.Outlined.FavoriteBorder)" />
+
+                                            <MudText Typo="Typo.body2">@item.Likes Likes</MudText>
+                                        </div>
+                                    </div>
+                                </MudCardContent>
+                            </MudCard>
+                        </MudItem>
+                    }
+                    @if (likedVideos.Count == 0)
+                    {
+                        <MudText Style="text-align: center; margin-top: 20px;">No video found</MudText>
+                    }
+</MudItem>
+
+            </ChildContent>
+
+        </MudExpansionPanel>
+
+        </MudExpansionPanels>
+    
+        
+</MudContainer>
+    
+
+
+<style>
+
+</style>

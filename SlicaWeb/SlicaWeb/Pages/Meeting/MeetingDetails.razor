@@ -1,0 +1,131 @@
+﻿@page "/meeting-details/{MeetingID:int}"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject CookieManagement CookieManager
+@inject NavigationManager NavigationManager
+@inject NotificationService NotificationManager
+<PageTitle>Meeting Detials</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+        <div class="row">
+            <div class="col-12">
+                <MudItem>
+                    <div class="row">
+                        <div class="col-6">
+                            <MudText Class="pa-2" Typo="Typo.h6">Meeting Details</MudText>
+                        </div>
+                        <div class="col-3">
+                        </div>
+                        <div class="col-3">
+                            <MudSpacer />
+                            <div hidden="@(!meeting.IsActive)">
+
+                            <MudItem  Class="pa-2 d-flex">
+                                    <MudNavLink Disabled="@(!meeting.IsJoin)" Class="pl-lg-4 pl-md-4" Icon="@Icons.Material.Filled.Launch" Href="@("/meeting/"+meeting.Code)">Join</MudNavLink>
+                                <MudNavLink  Class="pl-lg-4 pl-md-4" Icon="@Icons.Material.Filled.Send" OnClick="OpenSendInviteDialog">Send Invites</MudNavLink>
+                            </MudItem>
+                            </div>
+
+                        </div>
+                    </div>
+                </MudItem>
+            </div>
+            <MudDivider />
+
+        </div>
+    </MudItem>
+    <MudItem>  
+        <MudItem Class="d-inline-flex">
+        <MudText Class="text-center pa-5 pt-6" Typo="Typo.subtitle1">
+            <b>Meeting Code:</b>
+        </MudText>
+        <MudText Class="text-center pa-2 pt-6" Typo="Typo.subtitle1">
+            @meeting.Code
+        </MudText>
+        <MudText Class="text-center pa-5 pt-6" Typo="Typo.subtitle1">
+            <b>Meeting Title:</b>
+        </MudText>
+        <MudText Class="text-center pa-2 pt-6" Typo="Typo.subtitle1">
+            @meeting.Title
+        </MudText>
+        </MudItem>
+    </MudItem>
+        <MudItem>  
+
+    <MudItem Class="d-inline-flex">
+
+        <MudText Class="text-center pa-5 pt-6" Typo="Typo.subtitle1">
+            <b> Start Date Time:</b>
+        </MudText>
+        <MudText Class="text-center pa-2 pt-6" Typo="Typo.subtitle1">
+            @if (meeting.StartDateTime.HasValue)
+            {
+                @meeting.StartDateTime.Value.ToString("dd-MMM-yyyy HH:mm")
+            }
+        </MudText>
+
+        <MudText Class="text-center pa-5 pt-6" Typo="Typo.subtitle1">
+            <b>Meeting Duration:</b>
+        </MudText>
+        <MudText Class="text-center pa-2 pt-6" Typo="Typo.subtitle1">
+            @meeting.Duration Minute(s)
+        </MudText>
+
+    </MudItem>
+    </MudItem>
+            <MudItem>  
+
+    <MudItem Class="d-inline-flex">
+
+
+        <MudText Class="text-center pa-5 pt-6" Typo="Typo.subtitle1">
+            <b> Meeting Status: </b>
+        </MudText>
+        <MudText Class="text-center pa-2 pt-6" Typo="Typo.subtitle1">
+            @meeting.Status
+        </MudText>
+    </MudItem>
+    </MudItem>
+
+    <MudItem Class="mt-2" xs="12" sm="10" md="10">
+
+        <MudDataGrid Items="@inviteeDetails" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+                     Hideable="false">
+            <NoRecordsContent>
+                <MudText Typo="Typo.caption"> No Meeting Details.</MudText>
+            </NoRecordsContent>
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Meeting Invitees</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <Columns>
+                <PropertyColumn Property="x => x.SNo" Title="SNo" />
+                <PropertyColumn Property="x => x.Name" />
+                <PropertyColumn Property="x => x.Email" />
+                <PropertyColumn Property="x => x.Status" />
+                <PropertyColumn Format="dd-MMM-yyyy HH:mm" Property="x => x.LastInvitationDate" />
+
+                <TemplateColumn Title="Action" CellClass="d-flex justify-start">
+                    <CellTemplate>
+                        <MudStack>
+                            <div hidden="@(!meeting.IsActive || context.Item.IsHost)">
+                            <MudNavLink OnClick="@(()=>ResendEmail(context.Item.UserID))" Icon="@Icons.Material.Filled.Email">Resend</MudNavLink>
+                            </div>
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="InviteeModel" />
+            </PagerContent>
+        </MudDataGrid>
+
+    </MudItem>
+
+
+</MudContainer>
+
+
+

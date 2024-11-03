@@ -1,0 +1,43 @@
+﻿@inject NavigationManager navigationManager
+@inject CookieManagement CookieManager
+
+@using Newtonsoft.Json;
+
+<MudDialog>
+    <DialogContent>
+        Are you sure you want to delete your profile ?
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit">Confirm</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    async Task Submit()
+    {
+        try
+        {
+            var sessionModel = await CookieManager.GetCookie<UserModel>("LoggedInUserInfo");
+
+            if (sessionModel != null)
+            {
+                var requestBody = JsonConvert.SerializeObject(new
+                {
+                    UserID = sessionModel.Id
+                });
+
+                var jsonStr = await CommonMethods.PostDataAsync(requestBody.ToString(), sessionModel.APIKey, sessionModel.SessionKey, "/ACC/DeleteAccount");
+            }
+            MudDialog.Close(DialogResult.Ok(true));
+            await CookieManager.DeleteCookie("LoggedInUserInfo");
+            navigationManager.NavigateTo("/");
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, new UserModel());
+        }
+    }
+
+    void Cancel() => MudDialog.Cancel();
+}

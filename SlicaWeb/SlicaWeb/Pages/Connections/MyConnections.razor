@@ -1,0 +1,89 @@
+﻿@page "/my-connections"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject CookieManagement CookieManager
+@inject NavigationManager NavigationManager
+<PageTitle>My Connections</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+        <div class="row">
+            <div class="col-12">
+                <MudItem>
+                    <div class="row">
+                        <div class="col-6">
+                            <MudText Class="pa-2" Typo="Typo.h6">My Connections</MudText>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-2">
+                            <MudSpacer />
+                            <MudItem Style="display:flex;" Class="pa-2">
+                                <MudNavLink Class="pl-lg-4 pl-md-4" Icon="@Icons.Material.Filled.PersonAdd" Href="/send-requests">Connect More</MudNavLink>
+                            </MudItem>
+                        </div>
+                    </div>
+                </MudItem>
+            </div>
+            <MudDivider />
+
+        </div>
+    </MudItem>
+    <MudItem>
+        <MudText Class="pa-2 pt-6" Typo="Typo.h6">
+            Discover your Network
+        </MudText>
+        <MudText Class="pa-2" Typo="Typo.body1">
+            Here, you can view and manage all your current connections, easily disconnect from anyone you choose. Stay connected and in control of your network.
+
+
+        </MudText>
+    </MudItem>
+    
+
+    <MudItem Class="mt-2" xs="12" sm="10" md="10">
+
+        <MudDataGrid Items="@connectionDetails" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+                     Hideable="false">
+            <NoRecordsContent>
+                <MudText Typo="Typo.caption"> No Connections.</MudText>
+            </NoRecordsContent>
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">My Connections</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <Columns>
+                <PropertyColumn Property="x => x.SNo" Title="SNo" />
+                <TemplateColumn Title="Name">
+                    <CellTemplate>
+                        <MudStack Row>
+                            <MudAvatar>
+                                <MudImage Src="@(!string.IsNullOrEmpty(context.Item.FileName)?"Images/Profile/"+context.Item.FileName:"Images/Profile/noprofile.jpg")"></MudImage>
+                            </MudAvatar>
+                            <MudLink Color="Color.Dark" OnClick="@(()=>OpenBioDialog(context.Item.Bio,context.Item.Name,context.Item.FileName))" Underline="Underline.None">@context.Item.Name</MudLink>
+
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>                <PropertyColumn Property="x => x.Email" />
+                <PropertyColumn Format="dd-MMM-yyyy HH:mm" Property="x => x.ConnectedSince" />
+                <TemplateColumn Title="Action" CellClass="d-flex justify-start">
+                    <CellTemplate>
+                        <MudStack>
+                            <MudNavLink  OnClick="@(()=>OnDisconnect(@context.Item.Id))" Icon="@Icons.Material.Filled.PersonRemove">Disconnect</MudNavLink>
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="ConnectionModel" />
+            </PagerContent>
+        </MudDataGrid>
+
+    </MudItem>
+
+
+</MudContainer>
+
+
+

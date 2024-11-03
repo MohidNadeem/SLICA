@@ -1,0 +1,290 @@
+﻿@using SlicaWeb.Models
+@using Microsoft.AspNetCore.SignalR.Client;
+@using Newtonsoft.Json;
+@using SlicaWeb.Common;
+@using Newtonsoft.Json.Linq;
+
+@inject CookieManagement CookieManager
+@inject NavigationManager NavigationManager
+
+
+
+<MudBadge Content="NotificationsCount" Color="Color.Primary" Overlap="true" Class="mx-2 my-2" BadgeClass="ml-1" Origin="Origin.CenterRight">
+    <MudIconButton aria-label="Notification" Size="Size.Small" Icon="@Icons.Material.Filled.Notifications" OnClick="@ToggleNotification" Color="Color.Inherit" Class="pa-1" />
+</MudBadge>
+
+<MudPopover @ref="notificationRef" Open="@_isOpenNotification" RelativeWidth="true" Class="pa-1 border border-solid mt-1" AnchorOrigin="Origin.BottomRight" Square="true" Elevation="0" Style="@($"background:{Colors.Shades.White}; border-color:{Colors.Grey.Lighten2}; width:400px;")">
+
+    <MudPaper Class="pa-1 d-flex justify-space-between border-b border-solid" Elevation="0" Square="true" Style="@($"border-color:{Colors.Grey.Lighten2} ")">
+        <MudPaper Class="d-inline-flex align-self-center pa-0" Elevation="0" Style="@($" background-color:{Colors.Shades.Transparent};")">
+            <MudText Typo="Typo.body1" Color="Color.Dark">Notification</MudText>
+        </MudPaper>
+        <MudPaper Class="pa-0" Elevation="0" Style="@($" background-color:{Colors.Shades.Transparent};")">
+            <MudIconButton ButtonType="MudBlazor.ButtonType.Button" Icon="@Icons.Material.Filled.Close" OnClick="@ToggleNotification" Color="Color.Dark" Size="Size.Small" aria-label="Notification Close" />
+        </MudPaper>
+    </MudPaper>
+
+    <MudElement HtmlTag="div" Class="ma-0" Style="@($"max-height:300px; overflow: auto;")">
+
+
+
+        <MudOverlay Visible="isVisibleLoadedMoreNotification" LightBackground="true" Absolute="true">
+            <MudProgressCircular Color="Color.Secondary" Size="Size.Medium" Indeterminate="true" />
+        </MudOverlay>
+        @if (listNotifications.Count == 0)
+        {
+            <MudPaper Class="pa-0 d-flex border-b border-solid" Elevation="0" Square="true" Style="@($" border-color:{Colors.Grey.Lighten2};")">
+
+                <MudPaper Class="pa-1" Elevation="0">
+                    <MudElement HtmlTag="div">
+                        <MudText Typo="Typo.caption">No notifications to display</MudText>
+                    </MudElement>
+
+                </MudPaper>
+            </MudPaper>
+        }
+        else
+        {
+
+
+            @foreach (var notification in displayedNotifications)
+            {
+                <MudPaper Class="pa-0 d-flex border-b border-solid" Elevation="0" Square="true" Style="@($" border-color:{Colors.Grey.Lighten2};")">
+                    <MudPaper Class="pa-1 pr-2 d-inline-flex align-self-center" Elevation="0">
+                        @if(notification.Type == 1)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.Comment" Size="Size.Small" Color="Color.Dark"></MudIcon>
+                        }
+                        else if(notification.Type == 2)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.PersonAddAlt1" Size="Size.Small" Color="Color.Dark"></MudIcon>
+                        }
+                        else if(notification.Type == 3)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.Group" Size="Size.Small" Color="Color.Dark"></MudIcon>
+                        }
+                        else if (notification.Type == 4)
+                        {
+                            <MudIcon Icon="@Icons.Material.Filled.InsertInvitation" Size="Size.Small" Color="Color.Dark"></MudIcon>
+                        }
+
+                    </MudPaper>
+                    <MudPaper Class="pa-1" Elevation="0">
+                        <MudElement HtmlTag="div">
+                            <MudText Typo="Typo.caption">@notification.Message</MudText>
+
+                        </MudElement>
+                        <MudElement HtmlTag="div">
+                            <MudText Typo="Typo.caption" Style="@($"color:{Colors.Grey.Darken1}; font-size: 11px;")">@notification.Date.ToString("dd:MMM:yyyy HH:mm") &nbsp; @notification.ElaspedTime.ToString()</MudText>
+                        </MudElement>
+                    </MudPaper>
+
+                        <MudPaper Style="@($"padding-left:90px !important;")"  Class="pa-1 d-inline-flex align-self-center" Elevation="0">
+                            <MudIconButton ButtonType="MudBlazor.ButtonType.Button" Icon="@Icons.Material.Filled.Close" OnClick="@(()=>DeleteNotifications(notification.Id))" Style="@($"color:{Colors.Grey.Darken1};")" Size="Size.Small" aria-label="Clear" />
+                        </MudPaper>
+                </MudPaper>
+            }
+
+        }
+
+    </MudElement>
+
+    @if (displayedNotifications.Count < listNotifications.Count)
+    {
+
+        <MudPaper Class="pa-1 d-flex align-center justify-center" Elevation="0" Square="true">
+            <MudButton DisableElevation="true" Class="border-0 rounded-0 px-2" OnClick="@LoadMore" ButtonType="MudBlazor.ButtonType.Button" Size="Size.Small" Variant="Variant.Filled" Color="Color.Dark">Load more</MudButton>
+        </MudPaper>
+
+    }
+
+
+
+
+</MudPopover>
+
+
+@code {
+    private HubConnection notificationHub;
+    public bool isConnected = false;
+    private MudPopover notificationRef;
+    string NotificationsCount = "0";
+    private List<NotificationModel> listNotifications = new List<NotificationModel>();
+    private List<NotificationModel> displayedNotifications = new List<NotificationModel>();
+    private int pageSize = 10;
+    private int userId = 0;
+    UserModel objLoggedInUserInfo;
+    public bool _isOpenNotification = false;
+
+    public async void ToggleNotification()
+    {
+        if (_isOpenNotification)
+        {
+            displayedNotifications = new List<NotificationModel>();
+            await GetUserNotifications();
+            LoadMore();
+        }
+        if (!_isOpenNotification)
+        {
+            if (NotificationsCount != "0")
+            {
+                await UpdateNotifications();
+                this.InvokeAsync(() => this.StateHasChanged());
+            }
+        }
+        _isOpenNotification = !_isOpenNotification;
+        this.InvokeAsync(() => this.StateHasChanged());
+    }
+
+    private bool isVisibleLoadedMoreNotification;
+    private bool isVisibleNewTwoFactor;
+
+
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            objLoggedInUserInfo = await CookieManager.GetCookie<UserModel>("LoggedInUserInfo");
+
+
+            if (objLoggedInUserInfo != null && objLoggedInUserInfo.Id != null)
+            {
+                userId = Convert.ToInt32(objLoggedInUserInfo.Id);
+                notificationHub = new HubConnectionBuilder().WithUrl(NavigationManager.ToAbsoluteUri("/NotificationHub")).Build();
+                notificationHub.On<NotificationModel>("ReceiveNotification", (newNotification) =>
+                {
+                    if (newNotification.UserId == userId)
+                    {
+                        GetUserNotifications();
+                        displayedNotifications = new List<NotificationModel>();
+                        LoadMore();
+                    }
+
+
+                });
+                await notificationHub.StartAsync();
+                isConnected = notificationHub.State == HubConnectionState.Connected;
+                await GetUserNotifications();
+                LoadMore();
+            }
+        }
+    }
+
+    public async Task UpdateNotifications()
+    {
+        try
+        {
+
+            string requestBody = JsonConvert.SerializeObject(new
+            {
+                UserID = userId.ToString(),
+            });
+            var response = await CommonMethods.PostDataAsync(requestBody.ToString(), objLoggedInUserInfo!.APIKey, objLoggedInUserInfo.SessionKey, "/ACC/UpdateNotification");
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, objLoggedInUserInfo);
+
+        }
+        finally
+        {
+            NotificationsCount = "0";
+
+        }
+    }
+
+    public async Task DeleteNotifications(int notificationId)
+    {
+        try
+        {
+
+            string requestBody = JsonConvert.SerializeObject(new
+            {
+                ID = notificationId,
+            });
+            var response = await CommonMethods.PostDataAsync(requestBody.ToString(), objLoggedInUserInfo!.APIKey, objLoggedInUserInfo.SessionKey, "/ACC/DeleteNotification");
+            dynamic responseJson = JsonConvert.DeserializeObject(response);
+
+            int returnStatus = responseJson!["status"];
+            string returnMessage = responseJson["message"];
+
+            if (returnStatus == 200)
+            {
+                displayedNotifications.RemoveAll(item => item.Id == notificationId);
+                StateHasChanged();
+               await GetUserNotifications();
+            }
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, objLoggedInUserInfo);
+
+        }
+        
+    }
+
+    public async Task GetUserNotifications()
+    {
+        try
+        {
+
+            string requestBody = JsonConvert.SerializeObject(new
+            {
+                UserID = userId.ToString(),
+            });
+            var response = await CommonMethods.PostDataAsync(requestBody.ToString(), objLoggedInUserInfo!.APIKey, objLoggedInUserInfo.SessionKey, "/ACC/GetNotification");
+
+            dynamic responseJson = JsonConvert.DeserializeObject(response);
+
+            int returnStatus = responseJson!["status"];
+            string returnMessage = responseJson["message"];
+
+            if (returnStatus == 200)
+            {
+                JArray data = responseJson["data"];
+                if (data.Count > 0)
+                {
+                    listNotifications = JsonConvert.DeserializeObject<List<NotificationModel>>(data[0].ToString());
+                    int Count = listNotifications.Where(x => !x.IsRead).Count();
+                    if (Count > 9)
+                    {
+                        NotificationsCount = "9+";
+                    }
+                    else
+                    {
+                        NotificationsCount = listNotifications.Where(x => !x.IsRead).Count().ToString();
+                    }
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, objLoggedInUserInfo);
+
+        }
+        finally
+        {
+            this.InvokeAsync(() => this.StateHasChanged());
+
+        }
+
+    }
+    private async void LoadMore()
+    {
+        isVisibleLoadedMoreNotification = true;
+        await Task.Delay(1000);
+
+        int startIndex = displayedNotifications.Count;
+        int endIndex = startIndex + pageSize;
+
+        for (int i = startIndex; i < endIndex && i < listNotifications.Count; i++)
+        {
+            displayedNotifications.Add(listNotifications[i]);
+        }
+        isVisibleLoadedMoreNotification = false;
+        this.InvokeAsync(() => this.StateHasChanged());
+    }
+}

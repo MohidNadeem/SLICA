@@ -1,0 +1,395 @@
+@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+h1:focus {
+    outline: none;
+}
+
+a, .btn-link {
+    color: #0071c1;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.mud-navmenu.mud-navmenu-default .mud-nav-link.active:not(.mud-nav-link-disabled) {
+    color: black !important;
+}
+
+[disabled] {
+    cursor: not-allowed !important;
+}
+
+.mud-nav-item[disabled] {
+    opacity: 0.5;
+}
+
+.mud-nav-link:hover {
+    color: #594ae2 !important;
+    background-color: #594ae20f !important;
+}
+
+.mud-nav-link-icon {
+    color: #424242 !important;
+}
+
+.mud-button-text.mud-button-text-primary {
+    color: #594ae2 !important;
+}
+
+    .mud-button-text.mud-button-text-primary:hover, .mud-button-text.mud-button-text-primary:focus-visible {
+        background-color: #594ae20f !important;
+    }
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.blazor-error-boundary {
+    background: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTYiIGhlaWdodD0iNDkiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIG92ZXJmbG93PSJoaWRkZW4iPjxkZWZzPjxjbGlwUGF0aCBpZD0iY2xpcDAiPjxyZWN0IHg9IjIzNSIgeT0iNTEiIHdpZHRoPSI1NiIgaGVpZ2h0PSI0OSIvPjwvY2xpcFBhdGg+PC9kZWZzPjxnIGNsaXAtcGF0aD0idXJsKCNjbGlwMCkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0yMzUgLTUxKSI+PHBhdGggZD0iTTI2My41MDYgNTFDMjY0LjcxNyA1MSAyNjUuODEzIDUxLjQ4MzcgMjY2LjYwNiA1Mi4yNjU4TDI2Ny4wNTIgNTIuNzk4NyAyNjcuNTM5IDUzLjYyODMgMjkwLjE4NSA5Mi4xODMxIDI5MC41NDUgOTIuNzk1IDI5MC42NTYgOTIuOTk2QzI5MC44NzcgOTMuNTEzIDI5MSA5NC4wODE1IDI5MSA5NC42NzgyIDI5MSA5Ny4wNjUxIDI4OS4wMzggOTkgMjg2LjYxNyA5OUwyNDAuMzgzIDk5QzIzNy45NjMgOTkgMjM2IDk3LjA2NTEgMjM2IDk0LjY3ODIgMjM2IDk0LjM3OTkgMjM2LjAzMSA5NC4wODg2IDIzNi4wODkgOTMuODA3MkwyMzYuMzM4IDkzLjAxNjIgMjM2Ljg1OCA5Mi4xMzE0IDI1OS40NzMgNTMuNjI5NCAyNTkuOTYxIDUyLjc5ODUgMjYwLjQwNyA1Mi4yNjU4QzI2MS4yIDUxLjQ4MzcgMjYyLjI5NiA1MSAyNjMuNTA2IDUxWk0yNjMuNTg2IDY2LjAxODNDMjYwLjczNyA2Ni4wMTgzIDI1OS4zMTMgNjcuMTI0NSAyNTkuMzEzIDY5LjMzNyAyNTkuMzEzIDY5LjYxMDIgMjU5LjMzMiA2OS44NjA4IDI1OS4zNzEgNzAuMDg4N0wyNjEuNzk1IDg0LjAxNjEgMjY1LjM4IDg0LjAxNjEgMjY3LjgyMSA2OS43NDc1QzI2Ny44NiA2OS43MzA5IDI2Ny44NzkgNjkuNTg3NyAyNjcuODc5IDY5LjMxNzkgMjY3Ljg3OSA2Ny4xMTgyIDI2Ni40NDggNjYuMDE4MyAyNjMuNTg2IDY2LjAxODNaTTI2My41NzYgODYuMDU0N0MyNjEuMDQ5IDg2LjA1NDcgMjU5Ljc4NiA4Ny4zMDA1IDI1OS43ODYgODkuNzkyMSAyNTkuNzg2IDkyLjI4MzcgMjYxLjA0OSA5My41Mjk1IDI2My41NzYgOTMuNTI5NSAyNjYuMTE2IDkzLjUyOTUgMjY3LjM4NyA5Mi4yODM3IDI2Ny4zODcgODkuNzkyMSAyNjcuMzg3IDg3LjMwMDUgMjY2LjExNiA4Ni4wNTQ3IDI2My41NzYgODYuMDU0N1oiIGZpbGw9IiNGRkU1MDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPjwvZz48L3N2Zz4=) no-repeat 1rem/1.8rem, #b32121;
+    padding: 1rem 1rem 1rem 3.7rem;
+    color: white;
+}
+
+    .blazor-error-boundary::after {
+        content: "An error has occurred."
+    }
+/******************video calling css start*******************/
+.meeting-infobox .black-video-box {
+    background: #000000;
+    padding: 12px 15px;
+    border-radius: 10px;
+}
+
+    .meeting-infobox .black-video-box .video-title-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #7D91AA;
+        padding-bottom: 10px;
+    }
+
+        .meeting-infobox .black-video-box .video-title-box h6 {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+            .meeting-infobox .black-video-box .video-title-box h6 .back-call {
+                background: #354657;
+                width: 25px;
+                height: 25px;
+                border-radius: 7px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                margin-right: 7px;
+            }
+
+        .meeting-infobox .black-video-box .video-title-box .add-more {
+            font-weight: 600;
+            background: #354657;
+            border: 1px solid #354657;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+            .meeting-infobox .black-video-box .video-title-box .add-more i {
+                padding-right: 2px;
+            }
+
+    .meeting-infobox .black-video-box .video-screen {
+        position: relative;
+    }
+
+        .meeting-infobox .black-video-box .video-screen .record-list {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+
+            .meeting-infobox .black-video-box .video-screen .record-list p {
+                color: #BFBFBF;
+                font-size: 13px;
+                display: flex;
+                align-items: center;
+            }
+
+                .meeting-infobox .black-video-box .video-screen .record-list p i {
+                    color: #FF0000;
+                    padding-right: 7px;
+                    font-size: 15px;
+                }
+
+            .meeting-infobox .black-video-box .video-screen .record-list span {
+                color: #fff;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+            }
+
+                .meeting-infobox .black-video-box .video-screen .record-list span .add-user {
+                    background: #354657;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 7px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #fff;
+                    margin-right: 7px;
+                }
+
+        .meeting-infobox .black-video-box .video-screen .text-img {
+            margin: 8px 0;
+            display: inline-block;
+        }
+
+    .meeting-infobox .black-video-box .chat-box {
+        background: #1F2429;
+        margin-top: 0px;
+        padding: 9px 10px;
+        border-radius: 15px;
+        height: 300px;
+    }
+
+        .meeting-infobox .black-video-box .chat-box .day-list {
+            text-align: center;
+            position: relative;
+            display: none;
+        }
+
+            .meeting-infobox .black-video-box .chat-box .day-list span {
+                font-size: 13px;
+                color: #fff;
+                width: fit-content;
+            }
+
+            .meeting-infobox .black-video-box .chat-box .day-list::before {
+                content: '';
+                background: #fff;
+                position: absolute;
+                height: 1px;
+                left: 20%;
+                right: 55%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .meeting-infobox .black-video-box .chat-box .day-list::after {
+                content: '';
+                background: #fff;
+                position: absolute;
+                height: 1px;
+                right: 20%;
+                left: 55%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+        .meeting-infobox .black-video-box .chat-box .message-box {
+            padding: 5px 0 0;
+            display: none;
+            height: 180px;
+            overflow: scroll;
+            scroll-behavior: smooth;
+        }
+
+            .meeting-infobox .black-video-box .chat-box .message-box .sent-message {
+                /*width: 50%;
+                    text-align: right;
+                    float: right;*/
+            }
+
+                .meeting-infobox .black-video-box .chat-box .message-box .sent-message span {
+                    color: #fff;
+                    font-size: 12px;
+                }
+
+                .meeting-infobox .black-video-box .chat-box .message-box .sent-message .sm-box {
+                    text-align: left;
+                    background: #131B26;
+                    padding: 10px;
+                    border-radius: 10px 0 10px 10px;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .sent-message .sm-box p {
+                        color: #fff;
+                        font-size: 15px;
+                        line-height: 18px;
+                    }
+
+                        .meeting-infobox .black-video-box .chat-box .message-box .sent-message .sm-box p i {
+                            color: #EBA352;
+                        }
+
+            .meeting-infobox .black-video-box .chat-box .message-box .new-message {
+                margin-top: 3px;
+                width: 100%;
+                display: inline-block;
+            }
+
+                .meeting-infobox .black-video-box .chat-box .message-box .new-message ul {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li .chat-img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 10px;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li span {
+                        color: #fff;
+                        font-size: 12px;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li .sm-box {
+                        text-align: left;
+                        background: #4A5767;
+                        padding: 10px;
+                        border-radius: 0 10px 10px 10px;
+                        width: 70%;
+                    }
+
+                        .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li .sm-box p {
+                            color: #fff;
+                            font-size: 15px;
+                            line-height: 18px;
+                        }
+
+        .meeting-infobox .black-video-box .chat-box .write-message-field {
+            background: #354657;
+            padding: 10px 15px;
+            margin-top: 7px;
+            border-radius: 12px;
+            display: none;
+        }
+
+            .meeting-infobox .black-video-box .chat-box .write-message-field ul {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+                .meeting-infobox .black-video-box .chat-box .write-message-field ul li .gallery-link {
+                    width: 40px;
+                    border-right: 1px solid #b9b9b9;
+                    text-align: center;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .gallery-link i {
+                        color: #fff;
+                    }
+
+                .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box {
+                    background: transparent;
+                    width: 376px;
+                    border: none;
+                    color: #fff;
+                    font-size: 15px;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                        color: #fff;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box::-moz-placeholder { /* Firefox 19+ */
+                        color: #fff;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box:-ms-input-placeholder { /* IE 10+ */
+                        color: #fff;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box:-moz-placeholder { /* Firefox 18- */
+                        color: #fff;
+                    }
+
+                .meeting-infobox .black-video-box .chat-box .write-message-field ul li .send-btn {
+                    background: #fff;
+                    border: 1px solid #fff;
+                    border-radius: 8px;
+                    color: #354657;
+                    font-size: 20px;
+                    width: 50px;
+                    height: 50px;
+                }
+
+.video-group {
+    position: relative;
+}
+
+#local-player {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+#remote-playerlist {
+    min-height: 350px !important;
+    display: flex;
+}
+
+.video-call-section {
+    margin-top: 100px;
+    padding: 100px 0;
+}
+
+#join-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.player div {
+    /* position: unset !important; */
+}
+/******************video calling css end*******************/

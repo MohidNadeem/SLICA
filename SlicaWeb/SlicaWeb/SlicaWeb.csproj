@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup Label="Globals">
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pages\Chat\**" />
+    <Content Remove="Pages\Chat\**" />
+    <EmbeddedResource Remove="Pages\Chat\**" />
+    <None Remove="Pages\Chat\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pages\LearningAcademy\LearningWords.razor.cs" />
+    <Compile Remove="Pages\Meeting\MeetingLog.razor.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\LearningAcademy\LearningWords.razor" />
+    <Content Remove="Pages\Meeting\MeetingLog.razor" />
+    <Content Remove="Shared\Notification.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.Video" Version="1.0.1" />
+    <PackageReference Include="Heron.MudCalendar" Version="1.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.2" />
+    <PackageReference Include="MudBlazor" Version="6.11.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\Images\Profile\" />
+  </ItemGroup>
+
+</Project>

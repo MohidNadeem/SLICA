@@ -1,0 +1,53 @@
+﻿@using System.ComponentModel.DataAnnotations;
+@inject NavigationManager NavigationManager;
+@inject IJSRuntime jsRuntime;
+
+<PageTitle>SLICA - Page Not Found</PageTitle>
+
+
+<MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Style="padding-top: 5%;" Elevation="0">
+    <MudGrid Spacing="0">
+
+        <MudItem xs="12">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudImage Fluid="true" Src="/images/404.png" Alt="Error" />
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudText Align="Align.Center" Color="Color.Primary" Typo="Typo.h1" Style="font-size: 40px;">Oops!</MudText>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" Class="my-4">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudText Align="Align.Center" Typo="Typo.body2">You are trying to access a page that is currently unavailable.</MudText>
+            </MudPaper>
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudText Align="Align.Center" Typo="Typo.body2">Please click on one of the buttons below to navigate to previous screen or to dashboard.</MudText>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" Class="my-4">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudButton DisableElevation="true" OnClick="PreviousPage"   Style="width: 150px" ButtonType="MudBlazor.ButtonType.Button" Size="Size.Small" Variant="Variant.Filled" Color="Color.Primary">Previous Page</MudButton>
+                <MudButton DisableElevation="true" OnClick="Dashboard" Class="ml-2"  Style="width: 150px" ButtonType="MudBlazor.ButtonType.Button" Size="Size.Small" Variant="Variant.Filled" Color="Color.Primary" >Go to Dashboard</MudButton>
+            </MudPaper>
+        </MudItem>
+
+    </MudGrid>
+</MudPaper>
+
+
+@code {
+    private void Dashboard()
+    {
+        NavigationManager.NavigateTo("/dashboard");
+    }
+
+    private async Task PreviousPage()
+    {
+        await jsRuntime.InvokeAsync<object>("history.back");
+    }
+}

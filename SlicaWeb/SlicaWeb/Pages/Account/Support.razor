@@ -1,0 +1,143 @@
+﻿@page "/support"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject CookieManagement CookieManager
+@inject NavigationManager NavigationManager
+<PageTitle>SLICA Support</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+        <div class="row">
+            <div class="col-12">
+                <MudItem>
+                    <div class="row">
+                        <div class="col-6">
+                            <MudText Class="pa-2" Typo="Typo.h6">SLICA Support</MudText>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-2">
+                            <MudSpacer />
+                            <MudItem Style="display:flex;" Class="pa-2">
+                            </MudItem>
+                        </div>
+                    </div>
+                </MudItem>
+            </div>
+            <MudDivider />
+
+        </div>
+    </MudItem>
+    <MudItem>
+        <MudText Class="pa-2 pt-6" Typo="Typo.h6">
+            Welcome to the SLICA Support
+        </MudText>
+        <MudText Class="pa-2" Typo="Typo.body1">
+            Here, you can view your previous issues or queries and its status, and can submit a new one. Stay calm our agent will revert back to you in 2 or 3 business days.
+
+        </MudText>
+    </MudItem>
+    <div class="row">
+    <MudItem Class="mt-2" xs="12" sm="10" md="10">
+            <EditForm EditContext="issueContext">
+                <DataAnnotationsValidator />
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-12 col-xl-4">
+
+                        <MudItem Class="pa-4">
+                            <MudTextField Class="black-border" For="@(() => issue.Name)" @bind-Value="@issue.Name" Label="Name" InputType="InputType.Text" />
+                        </MudItem>
+                    </div>
+                    <div class="col-md-4 col-lg-4 col-sm-12 col-xl-4">
+
+                        <MudItem Class="pa-4">
+                            <MudTextField Class="black-border" MaxLength="50" For="@(() => issue.Email)" @bind-Value="@issue.Email" Label="Email" InputType="InputType.Email" />
+                        </MudItem>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4 col-sm-12 col-xl-4">
+
+                        <MudItem Class="pa-4">
+                            <MudTextField Class="black-border" For="@(() => issue.PhoneNo)" @bind-Value="@issue.PhoneNo" Label="Phone No" InputType="InputType.Text" />
+                        </MudItem>
+                    </div>
+                    
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-12 col-xl-4">
+
+                        <MudItem Class="pa-4">
+                            <MudSelect T="int" Label="Category" For="@(() => issue.CategoryID)" @bind-Value="@issue.CategoryID" AnchorOrigin="Origin.BottomCenter">
+                                <MudSelectItem Value="@(1)">Technical Issue</MudSelectItem>
+                                <MudSelectItem Value="@(2)">Feature Request</MudSelectItem>
+                                <MudSelectItem Value="@(3)">General Inquiry</MudSelectItem>
+
+                            </MudSelect>
+                        </MudItem>
+                    </div>
+                    <div class="col-md-8 col-lg-8 col-sm-12 col-xl-8">
+
+                        <MudItem Class="pa-4">
+                            <MudTextField Class="black-border" For="@(() => issue.Subject)" @bind-Value="@issue.Subject" Label="Subject" InputType="InputType.Text" />
+                        </MudItem>
+                    </div>
+
+                   
+
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+
+                        <MudItem Class="pa-4">
+                            <MudTextField T="string" Class="black-border" MaxLength="100" Label="Description" Variant="Variant.Text" For="@(()=>issue.Description)" @bind-Value="@issue.Description" AutoGrow Lines="4" HelperText="Explain your query/issue here" />
+                        </MudItem>
+                    </div>
+           
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-lg-2 col-sm-2 col-xl-2">
+
+                        <MudButton FullWidth="true" ButtonType="ButtonType.Submit" OnClick="ReportIssue" Variant="Variant.Filled" Color="Color.Dark">Submit</MudButton>
+
+                    </div>
+
+                </div>
+
+            </EditForm>
+        </MudItem>
+    </div>
+
+    <MudItem Class="mt-2" xs="12" sm="10" md="10">
+
+        <MudDataGrid Items="@issueDetails" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+                     Hideable="false">
+            <NoRecordsContent>
+                <MudText Typo="Typo.caption"> No Issues.</MudText>
+            </NoRecordsContent>
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Previous Issues/Queries</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <Columns>
+                <PropertyColumn Property="x => x.Code" Title="Issue #" />
+                <PropertyColumn Property="x => x.Category" />
+                <PropertyColumn Property="x => x.Subject" />
+                <PropertyColumn Property="x => x.Description" />
+                <PropertyColumn Format="dd-MMM-yyyy HH:mm" Title="Reported Date" Property="x => x.ReportedDate" />
+                <PropertyColumn Property="x => x.Status" />
+                <PropertyColumn Format="dd-MMM-yyyy HH:mm" Title="Resolved Date" Property="x => x.ResolvedDate" />
+                
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="IssueModel" />
+            </PagerContent>
+        </MudDataGrid>
+
+    </MudItem>
+
+
+</MudContainer>
+
+
+

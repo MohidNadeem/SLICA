@@ -1,0 +1,413 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\SlicaWeb.bundle.scp.css",
+      "PackagePath": "staticwebassets\\SlicaWeb.bundle.scp.css"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\Images\\404.png",
+      "PackagePath": "staticwebassets\\Images\\404.png"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\Images\\Profile\\Muhammad_2.png",
+      "PackagePath": "staticwebassets\\Images\\Profile\\Muhammad_2.png"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\Images\\Profile\\noprofile.jpg",
+      "PackagePath": "staticwebassets\\Images\\Profile\\noprofile.jpg"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\Images\\logo.png",
+      "PackagePath": "staticwebassets\\Images\\logo.png"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\A.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\A.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\ABSOLUTELY NOTHING.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\ABSOLUTELY NOTHING.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\ANNOUNCE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\ANNOUNCE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\ARREST.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\ARREST.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\B.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\B.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\BAR.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\BAR.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\BAT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\BAT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\BIND.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\BIND.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\BRAIN STORM.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\BRAIN STORM.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\C.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\C.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\CANOE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\CANOE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\CARRY.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\CARRY.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\CHRISTMAS.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\CHRISTMAS.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\CLEAR.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\CLEAR.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\COCAINE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\COCAINE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\COUSIN.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\COUSIN.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\CROSS.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\CROSS.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\CURTAIN.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\CURTAIN.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\D.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\D.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\DEPARTMENT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\DEPARTMENT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\DISAGREEMENT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\DISAGREEMENT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\DISAPPOINT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\DISAPPOINT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\E.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\E.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\F.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\F.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\FRENCH.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\FRENCH.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\G.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\G.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\GIRL.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\GIRL.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\GLOVES.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\GLOVES.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\GLOW.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\GLOW.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\GOLF.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\GOLF.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\GONE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\GONE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\GOOD.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\GOOD.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\GOODY GOODY SHOE OPPOSITE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\GOODY GOODY SHOE OPPOSITE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\H.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\H.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\HAMBURGER.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\HAMBURGER.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\HEAD.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\HEAD.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\I.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\I.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\INTELLIGENT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\INTELLIGENT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\J.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\J.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\JEWISH.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\JEWISH.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\K.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\K.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\L.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\L.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\M.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\M.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\MEASURE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\MEASURE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\MICROSCOPE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\MICROSCOPE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\N.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\N.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\NAIL CLIPPER.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\NAIL CLIPPER.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\NEAR.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\NEAR.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\O.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\O.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\P.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\P.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\PERCEIVE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\PERCEIVE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\POSSIBLE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\POSSIBLE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\Q.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\Q.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\R.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\R.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\REALLY.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\REALLY.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\S.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\S.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\SAFE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\SAFE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\SCREAM.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\SCREAM.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\SELECT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\SELECT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\SHUT OUT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\SHUT OUT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\SOUR.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\SOUR.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\STAMP.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\STAMP.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\T.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\T.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\TEAM.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\TEAM.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\TENDENCY.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\TENDENCY.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\THINK CONNECT.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\THINK CONNECT.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\TOW.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\TOW.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\U.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\U.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\V.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\V.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\W.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\W.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\WE WILL SEE.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\WE WILL SEE.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\WIND.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\WIND.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\WRIST WATCH.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\WRIST WATCH.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\X.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\X.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\Y.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\Y.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\VideosData\\Z.mp4",
+      "PackagePath": "staticwebassets\\VideosData\\Z.mp4"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "PackagePath": "staticwebassets\\css\\open-iconic"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\README.md",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\css\\videocalling.css",
+      "PackagePath": "staticwebassets\\css\\videocalling.css"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\js\\cookies.js",
+      "PackagePath": "staticwebassets\\js\\cookies.js"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\js\\scroll.js",
+      "PackagePath": "staticwebassets\\js\\scroll.js"
+    },
+    {
+      "Id": "C:\\Users\\abc\\source\\repos\\SlicaWeb\\wwwroot\\js\\videoconference.js",
+      "PackagePath": "staticwebassets\\js\\videoconference.js"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.SlicaWeb.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.SlicaWeb.props",
+      "PackagePath": "build\\SlicaWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.SlicaWeb.props",
+      "PackagePath": "buildMultiTargeting\\SlicaWeb.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.SlicaWeb.props",
+      "PackagePath": "buildTransitive\\SlicaWeb.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

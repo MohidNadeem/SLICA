@@ -1,0 +1,530 @@
+/*sec-video-chat start*/
+.sec-video-chat {
+    /*margin-top: 180px;*/
+    padding: 70px 0;
+    position: relative;
+    background-color: #efefef;
+}
+
+    .sec-video-chat .screen-box {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+        .sec-video-chat .screen-box .online-box {
+            position: relative;
+        }
+
+            .sec-video-chat .screen-box .online-box .video-display {
+                display: flex;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex-wrap: wrap;
+            }
+
+                .sec-video-chat .screen-box .online-box .video-display li {
+                    width: 50%;
+                }
+
+                    .sec-video-chat .screen-box .online-box .video-display li .video-play-box {
+                        padding: 5px;
+                        position: relative;
+                        width: 100%;
+                        height: 230px;
+                        object-fit: cover;
+                        border: 1px solid #ccc;
+                        background-color: #686868;
+                    }
+
+                        .sec-video-chat .screen-box .online-box .video-display li .video-play-box .name-box {
+                            position: absolute;
+                            top: 7%;
+                            left: 7%;
+                            background-color: #000000bd;
+                            padding: 5px 10px;
+                            border-radius: 7px;
+                        }
+
+                            .sec-video-chat .screen-box .online-box .video-display li .video-play-box .name-box .para {
+                                color: #fff;
+                                font-size: 12px;
+                            }
+
+                        .sec-video-chat .screen-box .online-box .video-display li .video-play-box .button-command {
+                            position: absolute;
+                            bottom: 8%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            width: 100%;
+                            left: 0;
+                            right: 0;
+                        }
+
+                            .sec-video-chat .screen-box .online-box .video-display li .video-play-box .button-command li {
+                                width: unset;
+                                padding: 0 5px;
+                            }
+
+
+                        .sec-video-chat .screen-box .online-box .video-display li .video-play-box .screen-img {
+                            border-radius: 5px;
+                        }
+
+        .sec-video-chat .screen-box .applicant-screen {
+            padding: 5px;
+            position: relative;
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            background-color: #686868;
+        }
+
+    .sec-video-chat .applicant-screen .screen-img {
+        border-radius: 5px;
+    }
+
+    .sec-video-chat .detail-box {
+    }
+
+        .sec-video-chat .detail-box h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+        }
+
+        .sec-video-chat .detail-box .applicant-dropdown {
+        }
+
+            .sec-video-chat .detail-box .applicant-dropdown .heading-tab {
+                font-size: 16px;
+                font-weight: 600 !important;
+                color: #ffffff !important;
+                padding: 8px 15px;
+                position: relative;
+                border-bottom: 1px solid #ccc;
+                background-color: #286575;
+                width: 100%;
+                margin: 5px 0 0;
+            }
+
+                .sec-video-chat .detail-box .applicant-dropdown .heading-tab::before {
+                    content: '\f107';
+                    font-family: "Font Awesome 6 Pro";
+                    position: absolute;
+                    font-size: 17px;
+                    right: 4%;
+                    top: 8px;
+                }
+
+                .sec-video-chat .detail-box .applicant-dropdown .heading-tab:not(.collapsed)::before {
+                    content: '\f106';
+                }
+
+            .sec-video-chat .detail-box .applicant-dropdown .profile-view {
+                padding: 10px;
+                background-color: #efefef;
+            }
+
+                .sec-video-chat .detail-box .applicant-dropdown .profile-view .name-list {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+
+                    .sec-video-chat .detail-box .applicant-dropdown .profile-view .name-list li {
+                        padding: 0 5px;
+                    }
+
+                        .sec-video-chat .detail-box .applicant-dropdown .profile-view .name-list li .img-box {
+                            width: 50px;
+                        }
+
+                            .sec-video-chat .detail-box .applicant-dropdown .profile-view .name-list li .img-box .circle-img {
+                                width: 100%;
+                                height: 50px;
+                                border-radius: 50%;
+                                object-fit: cover;
+                            }
+
+                        .sec-video-chat .detail-box .applicant-dropdown .profile-view .name-list li h5 {
+                            font-size: 16px;
+                            font-weight: 600;
+                            color: #000;
+                            line-height: 18px;
+                            line-break: anywhere;
+                        }
+
+                        .sec-video-chat .detail-box .applicant-dropdown .profile-view .name-list li .para {
+                            font-size: 14px;
+                        }
+
+                .sec-video-chat .detail-box .applicant-dropdown .profile-view .test-box {
+                    padding: 15px 10px 0;
+                }
+
+                    .sec-video-chat .detail-box .applicant-dropdown .profile-view .test-box h3 {
+                        font-size: 16px;
+                        font-weight: 600;
+                        color: #000;
+                        line-height: 18px;
+                    }
+
+                    .sec-video-chat .detail-box .applicant-dropdown .profile-view .test-box h6 {
+                        font-weight: 600;
+                        padding: 5px 0;
+                    }
+
+                        .sec-video-chat .detail-box .applicant-dropdown .profile-view .test-box h6 span {
+                        }
+
+    .sec-video-chat .passed {
+        color: #00b900;
+    }
+
+    .sec-video-chat .fail {
+    }
+
+    .sec-video-chat .detail-box .applicant-dropdown .profile-view .lower-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 0;
+    }
+
+        .sec-video-chat .detail-box .applicant-dropdown .profile-view .lower-btn li {
+            padding: 0 10px;
+        }
+
+            .sec-video-chat .detail-box .applicant-dropdown .profile-view .lower-btn li .approved-btn {
+                background-color: #00b900;
+                padding: 6px 23px;
+                color: #fff;
+                border-radius: 7px;
+                font-weight: 500;
+            }
+
+            .sec-video-chat .detail-box .applicant-dropdown .profile-view .lower-btn li .reject-btn {
+                background-color: red;
+                padding: 6px 33px;
+                color: #fff;
+                border-radius: 7px;
+                font-weight: 500;
+            }
+/*sec-video-chat end*/
+
+/******************video calling css start*******************/
+.meeting-infobox .black-video-box {
+    background: #286575;
+    padding: 12px 15px;
+    border-radius: 10px;
+}
+
+    .meeting-infobox .black-video-box .video-title-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #7D91AA;
+        padding-bottom: 10px;
+    }
+
+        .meeting-infobox .black-video-box .video-title-box h6 {
+            color: #fff;
+            display: flex;
+            align-items: center;
+        }
+
+            .meeting-infobox .black-video-box .video-title-box h6 .back-call {
+                background: #354657;
+                width: 25px;
+                height: 25px;
+                border-radius: 7px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+                margin-right: 7px;
+            }
+
+        .meeting-infobox .black-video-box .video-title-box .add-more {
+            font-weight: 600;
+            background: #354657;
+            border: 1px solid #354657;
+            padding: 5px 10px;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 12px;
+        }
+
+            .meeting-infobox .black-video-box .video-title-box .add-more i {
+                padding-right: 2px;
+            }
+
+    .meeting-infobox .black-video-box .video-screen {
+        position: relative;
+    }
+
+        .meeting-infobox .black-video-box .video-screen .record-list {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+
+            .meeting-infobox .black-video-box .video-screen .record-list p {
+                color: #BFBFBF;
+                font-size: 13px;
+                display: flex;
+                align-items: center;
+            }
+
+                .meeting-infobox .black-video-box .video-screen .record-list p i {
+                    color: #FF0000;
+                    padding-right: 7px;
+                    font-size: 15px;
+                }
+
+            .meeting-infobox .black-video-box .video-screen .record-list span {
+                color: #fff;
+                font-size: 14px;
+                display: flex;
+                align-items: center;
+            }
+
+                .meeting-infobox .black-video-box .video-screen .record-list span .add-user {
+                    background: #354657;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 7px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: #fff;
+                    margin-right: 7px;
+                }
+
+        .meeting-infobox .black-video-box .video-screen .text-img {
+            margin: 8px 0;
+            display: inline-block;
+        }
+
+    .meeting-infobox .black-video-box .chat-box {
+        background: #1F2429;
+        margin-top: 0px;
+        padding: 9px 10px;
+        border-radius: 15px;
+        height: 300px;
+    }
+
+        .meeting-infobox .black-video-box .chat-box .day-list {
+            text-align: center;
+            position: relative;
+            display: none;
+        }
+
+            .meeting-infobox .black-video-box .chat-box .day-list span {
+                font-size: 13px;
+                color: #fff;
+                width: fit-content;
+            }
+
+            .meeting-infobox .black-video-box .chat-box .day-list::before {
+                content: '';
+                background: #fff;
+                position: absolute;
+                height: 1px;
+                left: 20%;
+                right: 55%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .meeting-infobox .black-video-box .chat-box .day-list::after {
+                content: '';
+                background: #fff;
+                position: absolute;
+                height: 1px;
+                right: 20%;
+                left: 55%;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+        .meeting-infobox .black-video-box .chat-box .message-box {
+            padding: 5px 0 0;
+            display: none;
+            height: 180px;
+            overflow: scroll;
+            scroll-behavior: smooth;
+        }
+
+            .meeting-infobox .black-video-box .chat-box .message-box .sent-message {
+                /*width: 50%;
+                    text-align: right;
+                    float: right;*/
+            }
+
+                .meeting-infobox .black-video-box .chat-box .message-box .sent-message span {
+                    color: #fff;
+                    font-size: 12px;
+                }
+
+                .meeting-infobox .black-video-box .chat-box .message-box .sent-message .sm-box {
+                    text-align: left;
+                    background: #131B26;
+                    padding: 10px;
+                    border-radius: 10px 0 10px 10px;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .sent-message .sm-box p {
+                        color: #fff;
+                        font-size: 15px;
+                        line-height: 18px;
+                    }
+
+                        .meeting-infobox .black-video-box .chat-box .message-box .sent-message .sm-box p i {
+                            color: #EBA352;
+                        }
+
+            .meeting-infobox .black-video-box .chat-box .message-box .new-message {
+                margin-top: 3px;
+                width: 100%;
+                display: inline-block;
+            }
+
+                .meeting-infobox .black-video-box .chat-box .message-box .new-message ul {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: flex-start;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li .chat-img {
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        margin-right: 10px;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li span {
+                        color: #fff;
+                        font-size: 12px;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li .sm-box {
+                        text-align: left;
+                        background: #4A5767;
+                        padding: 10px;
+                        border-radius: 0 10px 10px 10px;
+                        width: 70%;
+                    }
+
+                        .meeting-infobox .black-video-box .chat-box .message-box .new-message ul li .sm-box p {
+                            color: #fff;
+                            font-size: 15px;
+                            line-height: 18px;
+                        }
+
+        .meeting-infobox .black-video-box .chat-box .write-message-field {
+            background: #354657;
+            padding: 10px 15px;
+            margin-top: 7px;
+            border-radius: 12px;
+            display: none;
+        }
+
+            .meeting-infobox .black-video-box .chat-box .write-message-field ul {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+                .meeting-infobox .black-video-box .chat-box .write-message-field ul li .gallery-link {
+                    width: 40px;
+                    border-right: 1px solid #b9b9b9;
+                    text-align: center;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .gallery-link i {
+                        color: #fff;
+                    }
+
+                .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box {
+                    background: transparent;
+                    width: 376px;
+                    border: none;
+                    color: #fff;
+                    font-size: 15px;
+                }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                        color: #fff;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box::-moz-placeholder { /* Firefox 19+ */
+                        color: #fff;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box:-ms-input-placeholder { /* IE 10+ */
+                        color: #fff;
+                    }
+
+                    .meeting-infobox .black-video-box .chat-box .write-message-field ul li .type-box:-moz-placeholder { /* Firefox 18- */
+                        color: #fff;
+                    }
+
+                .meeting-infobox .black-video-box .chat-box .write-message-field ul li .send-btn {
+                    background: #fff;
+                    border: 1px solid #fff;
+                    border-radius: 8px;
+                    color: #354657;
+                    font-size: 20px;
+                    width: 50px;
+                    height: 50px;
+                }
+
+.video-group {
+    position: relative;
+}
+
+#local-player {
+    position: absolute;
+    right: 20px;
+    bottom: 10px;
+}
+
+#remote-playerlist {
+    min-height: 350px;
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+    #remote-playerlist li {
+        width: 50%;
+    }
+
+        #remote-playerlist li .agora_video_player {
+            position: relative !important;
+            height: 350px !important;
+        }
+
+
+.video-call-section {
+    /*margin-top: 100px;
+    padding: 60px 0;*/
+}
+
+#join-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/*.player div {
+    position: unset !important;
+}*/
+/******************video calling css end*******************/
+/*sec-video-chat end*/

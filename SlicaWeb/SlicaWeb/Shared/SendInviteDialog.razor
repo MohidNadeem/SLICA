@@ -1,0 +1,113 @@
+﻿@using SlicaWeb.Models
+@using Newtonsoft.Json;
+@inject CookieManagement CookieManager
+@inject NotificationService NotificationManager
+@inject ISnackbar Snackbar
+
+<MudDialog>
+
+    <DialogContent>
+        <MudDivider Style="margin-top:-1rem;" />
+        <MudItem>
+            <div class="row">
+                <div class="col-12">
+                    <EditForm EditContext="addinviteeContext">
+                        <DataAnnotationsValidator />
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+
+                                <MudItem Class="pa-4">
+                                    <MudSelect T="string" Label="Invitees" For="@(() => addinvitee.Invitees)" Placeholder="Select Invitees" MultiSelection="true" @bind-Value="addinvitee.Invitees">
+                                        @foreach (var connect in Connects)
+                                        {
+                                            <MudSelectItem T="string" Value="connect.Id.ToString()">@(connect.FirstName+ " " + connect.LastName)</MudSelectItem>
+                                        }
+                                    </MudSelect>
+                                </MudItem>
+                            </div>
+                           
+                        </div>
+                       
+                    </EditForm>
+                </div>
+
+            </div>
+        </MudItem>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit"> Send Invite</MudButton>
+    </DialogActions>
+</MudDialog>
+@code
+{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    static InviteeModel addinvitee = new InviteeModel();
+    EditContext addinviteeContext = new EditContext(addinvitee);
+    [Parameter]
+    public EventCallback<int> OnCreate { get; set; }
+    string selectedUsers = "";
+    [Parameter]
+    public List<UserModel> Connects { get; set; } = new List<UserModel>();
+    [Parameter]
+    public int MeetingID { get; set; } 
+    async Task Submit()
+    {
+        try
+        {
+            var sessionModel = await CookieManager.GetCookie<UserModel>("LoggedInUserInfo");
+            addinviteeContext.Validate();
+            List<string> validateParams = new List<string>
+            {
+                  "Invitees"
+            };
+            if (!CommonMethods.ValidateAttributes(addinvitee, validateParams))
+            {
+                return;
+            }
+
+            var requestBody = JsonConvert.SerializeObject(new
+            {
+                MeetingID = MeetingID,
+                UserID = sessionModel.Id,
+                UserIDs = addinvitee.Invitees
+            });
+
+            var jsonStr = await CommonMethods.PostDataAsync(requestBody.ToString(), sessionModel.APIKey, sessionModel.SessionKey, "/MEET/SendInvite");
+            dynamic result = JsonConvert.DeserializeObject(jsonStr);
+            int returnStatus = result["status"];
+            string returnMessage = result["message"];
+            if (returnStatus == 200)
+            {
+                string hostname = sessionModel.FirstName + " " + sessionModel.LastName;
+
+                foreach(var userid in addinvitee.Invitees.Split(","))
+                {
+                    NotificationModel notification = new NotificationModel { Message = hostname + " sent you a meeting invite. Please check meeting details on meeting hub screen.", Type = 4, UserId = Convert.ToInt32(userid) };
+                    await NotificationManager.SendNotificationAsync(notification);
+                }
+                Snackbar.Add(returnMessage, Severity.Success);
+                MudDialog.Close(DialogResult.Ok(true));
+                await OnCreate.InvokeAsync(1);
+
+            }
+            else
+            {
+                Snackbar.Add(returnMessage, Severity.Error);
+                MudDialog.Close(DialogResult.Ok(true));
+            }
+
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, new UserModel());
+        }
+        finally
+        {
+            addinvitee = new InviteeModel();
+
+        }
+    }
+    void Cancel() => MudDialog.Cancel();
+}

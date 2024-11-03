@@ -1,0 +1,195 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SlicaWeb
+build_property.RootNamespace = SlicaWeb
+build_property.ProjectDir = C:\Users\abc\source\repos\SlicaWeb\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\abc\source\repos\SlicaWeb
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/abc/source/repos/SlicaWeb/App.razor]
+build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Account/EmailVerification.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxFbWFpbFZlcmlmaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Account/ForgotPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Account/Login.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Account/Register.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxSZWdpc3Rlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Account/ResetPassword.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxSZXNldFBhc3N3b3JkLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Account/Support.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxTdXBwb3J0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Connections/MyConnections.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ubmVjdGlvbnNcTXlDb25uZWN0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Connections/MyRequests.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ubmVjdGlvbnNcTXlSZXF1ZXN0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Connections/SendRequests.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ29ubmVjdGlvbnNcU2VuZFJlcXVlc3RzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Counter.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ291bnRlci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Dashboard/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRGFzaGJvYXJkXEhvbWUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/FetchData.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRmV0Y2hEYXRhLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Index.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXgucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/LearningAcademy/LearmLetters.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhcm5pbmdBY2FkZW15XExlYXJtTGV0dGVycy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/LearningAcademy/LearningWords.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTGVhcm5pbmdBY2FkZW15XExlYXJuaW5nV29yZHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Meeting/Meeting.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVldGluZ1xNZWV0aW5nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Meeting/MeetingDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVldGluZ1xNZWV0aW5nRGV0YWlscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Meeting/MeetingHub.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVldGluZ1xNZWV0aW5nSHViLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Meeting/MeetingLog.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcTWVldGluZ1xNZWV0aW5nTG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/User/Profile.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVXNlclxQcm9maWxlLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/BioDetailsDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEJpb0RldGFpbHNEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/ChangePasswordDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXENoYW5nZVBhc3N3b3JkRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/DeleteAccountDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERlbGV0ZUFjY291bnREaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/DialogPreview.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpYWxvZ1ByZXZpZXcucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/DisconnectDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXERpc2Nvbm5lY3REaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/EmailVerification.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVtYWlsVmVyaWZpY2F0aW9uLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/EmailVerificationDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVtYWlsVmVyaWZpY2F0aW9uRGlhbG9nLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/EmptyLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXEVtcHR5TGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/MainLayoutBlack.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXRCbGFjay5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/MeetingDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1lZXRpbmdEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/NotFound.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5vdEZvdW5kLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/NotFoundLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5vdEZvdW5kTGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/Notification.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5vdGlmaWNhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/SendInviteDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFNlbmRJbnZpdGVEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/SurveyPrompt.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFN1cnZleVByb21wdC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/UpdateMeetingDialog.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFVwZGF0ZU1lZXRpbmdEaWFsb2cucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/UserInitials.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXFVzZXJJbml0aWFscy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE1haW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-54552ahnb1
+
+[C:/Users/abc/source/repos/SlicaWeb/Shared/NavMenu.razor]
+build_metadata.AdditionalFiles.TargetPath = U2hhcmVkXE5hdk1lbnUucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = b-yq32dh7s8o
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/_Host.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0hvc3QuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/abc/source/repos/SlicaWeb/Pages/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 

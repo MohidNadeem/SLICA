@@ -1,0 +1,301 @@
+﻿@page "/meeting/{MeetingCode:int}"
+@inject NavigationManager NavigationManager
+@inject CookieManagement CookieManager
+@inject NotificationService NotificationManager
+@inject IJSRuntime jsRuntime;
+
+@inject ISnackbar SnackBar;
+<style>
+    .group-list {
+        height: 470px;
+        overflow-y: scroll;
+    }
+
+        .group-list::-webkit-scrollbar {
+            width: 7px;
+            border-radius: 20px
+        }
+
+        /* Track */
+        .group-list::-webkit-scrollbar-track {
+            background: #e6e6e6;
+        }
+
+        /* Handle */
+        .group-list::-webkit-scrollbar-thumb {
+            background: #567384;
+            transition: 0.5s;
+            border-radius: 30px;
+        }
+
+            /* Handle on hover */
+            .group-list::-webkit-scrollbar-thumb:hover {
+                background: #e3d1b0;
+            }
+
+        .group-list ul {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+
+            .group-list ul li {
+                width: 100%;
+                padding: 0 10px;
+            }
+
+                .group-list ul li .group-box {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    width: 100%;
+                    background-color: #e9e9e9;
+                    border: 1px solid #ccc;
+                    border-radius: 10px;
+                    padding: 10px 20px;
+                    box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
+                    margin-bottom: 10px;
+                }
+
+
+                    .group-list ul li .group-box .img-box {
+                        width: 65px;
+                        height: 65px;
+                        margin-right: 15px;
+                    }
+
+                        .group-list ul li .group-box .img-box .profile-img {
+                            border-radius: 50%;
+                            width: 65px;
+                            height: 65px;
+                            object-fit: cover;
+                        }
+
+                    .group-list ul li .group-box .text-box {
+                    }
+
+                        .group-list ul li .group-box .text-box h4 {
+                            font-size: 20px;
+                            font-weight: 600;
+                            color: #567384;
+                        }
+
+                        .group-list ul li .group-box .text-box .para {
+                            font-size: 16px;
+                            color: #567384;
+                        }
+
+    .group-heading {
+        margin-bottom: 10px;
+    }
+
+        .group-heading h6 {
+            font-size: 22px;
+            font-weight: 600;
+            color: #567384;
+        }
+
+    .rtl-call .group-list ul {
+        flex-direction: row-reverse;
+    }
+
+        .rtl-call .group-list ul li .group-box {
+            flex-direction: row-reverse;
+        }
+
+            .rtl-call .group-list ul li .group-box .img-box {
+                margin-left: 10px;
+                margin-right: 0;
+            }
+
+            .rtl-call .group-list ul li .group-box .text-box {
+                text-align: right;
+            }
+
+    .player {
+        height: 88%;
+        width: auto;
+    }
+
+    ul#remote-playerlist li {
+        flex-direction: row;
+        display: flow-root;
+        width: 50%;
+    }
+</style>
+
+
+<div hidden="@(!IsShowMeeting)" class="meeting-infobox video-call-section">
+    <div class="container">
+        <div class="row rtl-row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-7 col-xxl-7">
+                <div class="msg-div"></div>
+                <div class="black-video-box">
+                    <label style="display:table-cell;color:#fff;float:right" id="lblcounter"></label>
+                    <div class="video-title-box">
+                        <h6> @meeting.MeetingName
+                        </h6>
+                        <small class="msg-audio"></small>
+                    </div>
+                    <div class="video-screen">
+                        <div class="record-list">
+                            <p>
+                                <i class="fas fa-dot-circle"></i>
+                                <label style="display:table-cell;color:#fff;float:right" id="countdown-timer"></label>
+                            </p>
+                        </div>
+                        <div class="img-box">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="row video-group">
+                                        <!-- Local Video -->
+
+                                        <div class="w-100"></div>
+                                        <!-- Remote Players -->
+                                        <div class="col-12">
+                                            <ul id="remote-playerlist">
+                                            </ul>
+                                        </div>
+                                        <div class="col-12">
+                                            <p id="local-player-name" class="player-name" style="display:none;"></p>
+                                            <div id="local-player" class="player" style="width:100px;height:100px;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col" style="display:none">
+                                    <!-- All Users List with Mute Controls -->
+                                    <div class="all-users-text my-3">
+                                        <h5 class="text-decoration-underline lang" key="All Users:"></h5>
+                                        <div class="all-users" id="all-users">
+                                            <ul id="insert-all-users">
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <form id="join-form">
+                                <div class="row join-info-group">
+                                    <input id="hdnUserID" type="hidden" value="@sessionModel.Id">
+                                    <input id="InterviewGroupid" type="hidden" value="@meeting.MeetingID">
+                                    <input id="hdnGroupID" type="hidden" value="@meeting.MeetingID">
+                                    <input id="appid" type="hidden" value="@meeting.AppID">
+                                    <input id="channel" type="hidden" value="@meeting.ChannelName">
+                                    <input id="token" type="hidden" value="@meeting.Token">
+                                    <input id="uid" type="hidden" value="@(meeting.ID+DateTime.Now.ToString("HHmmss"))">
+                                    <input id="hdnResourceId" type="hidden" value="">
+                                    <input id="hdnsid" type="hidden" value="">
+                                    <input id="rtmtoken" type="hidden" value="">
+                                    <input id="rtmuid" type="hidden" value="">
+                                    <input id="interviewDateTime" type="hidden" value="@Convert.ToDateTime(meeting.MeetingDateTime).ToString("yyyy-MM-ddTHH:mm")">
+                                    <input id="durationInMin" type="hidden" value="@meeting.Duration">
+                                 </div>
+
+                                <div class="button-group mt-2">
+                                    <span>
+                                        <button class="btn btn-primary d-none" id="waitingbtn" type="button" disabled>
+                                            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                                            Waiting for host permission...
+                                        </button>
+                                        <button id="join" type="submit" class="btn btn-success btn-sm d-none" style="height: 30px;background:green"><i class="fas fa-phone"></i></button>
+                                        <button id="rtmjoin" type="button" class="btn btn-success btn-sm" style="height: 30px;background:green;"><i class="fas fa-phone"></i></button>
+                                    </span>
+                                    <span>
+                                        <button id="mic-btn" type="button" class="btn btn-warning btn-sm" style="height: 30px;" disabled><i id="mic-icon" class="fas fa-microphone"></i></button>
+                                    </span>
+                                    <span>
+                                        <button id="video-btn" type="button" class="btn btn-info btn-sm" disabled><i id="video-icon" class="fa fa-video"></i></button>
+                                    </span>
+                                    <span>
+                                        <button id="leave" type="button" class="btn btn-danger btn-sm" style="height: 30px;background:red" disabled><i class="fas fa-phone-slash"></i></button>
+                                    </span>
+                                    
+                                </div>
+                            </form>
+                        </div>
+                        <div class="text-img">
+                        </div>
+                    </div>
+                    <div class="chat-box" style="display:none;">
+                        <div class="day-list">
+                            <span class="lang" key="Today"></span>
+                        </div>
+                        <div class="message-box">
+                            <div class="sent-message">
+                                <ul id="newMsg">
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="write-message-field">
+                            <ul>
+                                <li>
+                                    <a class="gallery-link" href="javascript:;"><i class="fa-solid fa-image"></i></a>
+                                </li>
+                                <li>
+                                    <textarea id="txtMsg" class="form-control type-box lang" rows="1" ph="" key="Write Your Message"></textarea>
+                                </li>
+                                <li>
+                                    <button class="send-btn" id="btnsend"><i class="fa-sharp fa-solid fa-paper-plane-top"></i></button>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-5 col-xxl-5 d-none">
+                <div class="group-heading">
+                    <h6 id="groupName"></h6>
+                </div>
+                <div class="group-list">
+                    <ul id="meeting-participant-list">
+
+                        @foreach(var item in participants)
+                        {
+                            <li id="anchor-@item.Id">@(item.FirstName + " " + item.LastName)</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@if(IsShowError)
+{
+    <MudPaper Class="d-flex flex-column flex-grow-1 gap-4" Style="padding-top: 5%;" Elevation="0">
+    <MudGrid Spacing="0">
+
+        <MudItem xs="12">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                    <MudIcon Icon="@Icons.Material.Filled.Warning" Color="Color.Warning" Style="@($"font-size: 80px;")"></MudIcon>
+                </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudText Align="Align.Center" Color="Color.Dark " Typo="Typo.h1" Style="font-size: 40px;">Oops!</MudText>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" Class="my-4">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudText Align="Align.Center" Color="Color.Dark" Typo="Typo.body2">@Message</MudText>
+            </MudPaper>
+        </MudItem>
+
+        <MudItem xs="12" Class="my-4">
+            <MudPaper Class="d-flex align-center justify-center mud-width-full" Elevation="0" Square="true">
+                <MudButton DisableElevation="true" OnClick="PreviousPage"   Style="width: 150px" ButtonType="MudBlazor.ButtonType.Button" Size="Size.Small" Variant="Variant.Filled" Color="Color.Dark">Previous Page</MudButton>
+                <MudButton DisableElevation="true" OnClick="Dashboard" Class="ml-2"  Style="width: 150px" ButtonType="MudBlazor.ButtonType.Button" Size="Size.Small" Variant="Variant.Filled" Color="Color.Dark" >Go to Dashboard</MudButton>
+            </MudPaper>
+        </MudItem>
+
+    </MudGrid>
+</MudPaper>
+    
+}
+<script type="text/javascript" src="/js/videoconference.js" asp-append-version="true"></script>

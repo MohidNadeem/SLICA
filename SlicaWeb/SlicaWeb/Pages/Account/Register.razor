@@ -1,0 +1,113 @@
+﻿@page "/register"
+@inject ISnackbar Snackbar
+@layout EmptyLayout
+@inject NavigationManager NavigationManager
+@inject CookieManagement CookieManager
+
+<style>
+    .mud-main-content {
+        padding: inherit !important;
+    }
+
+    .mud-container {
+        padding-right: 0px !important;
+        padding-left: 0px !important;
+    }
+</style>
+<PageTitle>Register</PageTitle>
+<MudPaper Height="400px" Width="100%">
+    <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+        <MudPaper Height="400px" Width="100%" Style="background-color:#212121" Square="true">
+            <div class="col-lg-8 offset-lg-2 col-sm-12 col-md-8 offset-md-2" style="padding:4rem;">
+                <MudPaper Height="800px" Width="100%">
+                    <MudCard Style="height:100%">
+                        <MudCardContent>
+                            <div class="text-center">
+                                <MudItem>
+                                    <MudImage Src="Images/logo.png" Alt="Slica Logo" Height="200" Width="250" Class="rounded-lg" />
+
+                                </MudItem>
+
+                            </div>
+                            <div class="text-center">
+                                <MudItem>
+                                    <MudText Typo="Typo.caption">We are so glad you have decided to try out <b>SLICA</b>. </MudText>
+                                </MudItem>
+                            </div>
+                            <div class="text-center">
+                                <MudItem>
+                                    <MudText Typo="Typo.caption">
+                                        Let’s start by creating your account.
+                                    </MudText>
+
+                                </MudItem>
+                            </div>
+                            <EditForm Model="signUpUser">
+                                <DataAnnotationsValidator />
+                                <div class="row">
+                                    <div class="col-6"> 
+                                <MudItem Class="pa-4">
+                                            <MudTextField Class="black-border" For="@(() => signUpUser.FirstName)" @bind-Value="@signUpUser.FirstName" Label="First Name" InputType="InputType.Text" />
+                                </MudItem>
+                                </div>
+                                    <div class="col-6">
+
+                                        <MudItem Class="pa-4">
+                                            <MudTextField Class="black-border" For="@(() => signUpUser.LastName)" @bind-Value="@signUpUser.LastName" Label="Last Name" InputType="InputType.Text" />
+                                </MudItem>
+                                </div>
+                                </div>
+                                 <div class="row">
+                                    <div class="col-12"> 
+                                <MudItem Class="pa-4">
+                                            <MudTextField Class="black-border" For="@(() => signUpUser.Email)" @bind-Value="@signUpUser.Email" Label="Email" InputType="InputType.Text" />
+                                </MudItem>
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <MudItem Class="pa-4">
+                                            <MudTextField Class="black-border" For="@(() => signUpUser.Password)" @bind-Value="@signUpUser.Password" Label="Password" InputType="InputType.Password" />
+                                        </MudItem>
+                                    </div>
+                                    <div class="col-6">
+
+                                        <MudItem Class="pa-4">
+                                            <MudTextField Class="black-border" For="@(() => signUpUser.ConfirmPassword)" @bind-Value="@signUpUser.ConfirmPassword" Label="Confirm Password" InputType="InputType.Password" />
+                                        </MudItem>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <MudCheckBox For="@(() => signUpUser.IsAgreePolicy)" @bind-Checked="@signUpUser.IsAgreePolicy">I agree to the terms of use and privacy policy.</MudCheckBox>
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-8 offset-2">
+
+                                    <MudItem Class="pa-4">
+                                            <MudButton Disabled="IsLoad" FullWidth="true" ButtonType="ButtonType.Submit" OnClick="OnSignUpFormSubmit" Variant="Variant.Filled" Color="Color.Dark">Sign Up</MudButton>
+
+                                    </MudItem>
+                                    </div>
+                                    </div>
+                             
+                                <div class="text-center">
+                                    <MudItem Class="pa-4">
+                                        <MudText Typo="Typo.overline"> Already a member?  <MudLink Href="/" Typo="Typo.overline" Style="@($"color:blue !important;")"> Sign In</MudLink> </MudText>&nbsp;&nbsp;
+
+                                    </MudItem>
+                                </div>
+                            </EditForm>
+                        </MudCardContent>
+
+                    </MudCard>
+                </MudPaper>
+            </div>
+
+        </MudPaper>
+    </MudContainer>
+
+
+</MudPaper>

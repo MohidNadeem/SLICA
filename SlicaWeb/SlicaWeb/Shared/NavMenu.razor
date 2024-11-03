@@ -1,0 +1,78 @@
+﻿<link href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" rel="stylesheet">
+@inject IDialogService DialogService
+
+<MudNavMenu>
+    <MudNavLink Style="color:black;" Disabled Match="NavLinkMatch.All" Icon="fas fa-comments"><MudText Typo="Typo.h6">SLICA</MudText> </MudNavLink>
+
+    <MudNavLink Href="/dashboard" Class="pt-4" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Dashboard">Dashboard</MudNavLink>
+    <MudNavGroup Class="pt-2" Title="Learnig Academy" Icon="@Icons.Material.Filled.School" Expanded="false">
+@*          <MudNavLink Class="pt-1" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.FollowTheSigns" Href="/learning-Words">Learn Words</MudNavLink>
+ *@         <MudNavLink Class="pt-1 align-end" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Abc" Href="/learning-Letters">Learn Letters</MudNavLink>
+    </MudNavGroup>
+     <MudNavGroup Class="pt-2" Title="Meetings" Icon="@Icons.Material.Filled.Duo" Expanded="false">
+
+       <MudNavLink Href="/meeting-hub" Class="pt-4" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Hub">Meeting Hub</MudNavLink>
+@*        <MudNavLink Href="/meeting-log" Class="pt-4" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.History">Meeting Logs</MudNavLink>
+ *@
+     </MudNavGroup>
+@*     <MudNavLink Href="/chat" Class="pt-2" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Chat">Chat</MudNavLink>
+ *@
+    <MudNavLink Class="pt-2" Href="/my-connections" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Favorite">My Connections</MudNavLink>
+    <MudNavGroup Class="pt-2" Title="Connection Requests" Icon="@Icons.Material.Filled.Group" Expanded="false">
+         <MudNavLink Class="pt-1" Href="/connection-requests" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Update">Pending Requests</MudNavLink>
+         <MudNavLink Href="/send-requests" Class="pt-1 align-end" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Send">Send Requests</MudNavLink>
+    </MudNavGroup>
+    <MudNavLink Href="/user-profile" Class="pt-2" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.Person">User Profile</MudNavLink>
+@*     <MudNavLink Href="/support" Class="pt-2" Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.SupportAgent">SLICA Support</MudNavLink>
+ *@
+</MudNavMenu>
+ <MudSpacer />
+ <MudNavMenu Class="pb-2">
+
+     <MudNavLink Class="pb-2" OnClick="OpenDialog"  Match="NavLinkMatch.All" Icon="@Icons.Material.Filled.PowerSettingsNew">Logout</MudNavLink>
+     </MudNavMenu>
+
+ @code {
+    private bool collapseNavMenu = true;
+
+    private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private void ToggleNavMenu()
+    {
+        collapseNavMenu = !collapseNavMenu;
+    }
+    MudTheme MyCustomTheme = new MudTheme()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = Colors.Shades.Black,
+                AppbarBackground = Colors.Shades.Black,
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Primary = Colors.Shades.Black,
+                AppbarBackground = Colors.Shades.Black,
+            },
+
+        };
+    private void OpenDialog()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Content","Are you sure you want to logout ?");
+        DialogService.Show<DialogPreview>("Logout",parameters, options);
+    }
+}
+
+ <style>
+    .mud-nav-link-expand-icon
+    {
+        display:none;
+    }
+
+    .mud-nav-link-disabled .mud-nav-link-text{
+        color:black !important;
+    }
+
+
+ </style>

@@ -1,0 +1,69 @@
+﻿@page "/"
+@layout EmptyLayout
+@inject ISnackbar Snackbar
+@inject NavigationManager NavigationManager
+@inject CookieManagement  CookieManager
+<style>
+.mud-main-content{
+    padding:inherit !important;
+}
+
+.mud-container
+{
+        padding-right:0px !important;
+        padding-left:0px !important;
+}
+</style>
+
+
+<PageTitle>Login</PageTitle>
+
+<MudPaper Height="400px" Width="100%">
+    <MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+        <MudPaper Height="400px" Width="100%" Style="background-color:#212121" Square="true">
+            <div class="col-lg-6 offset-lg-3 col-sm-12 col-xs-12 col-md-6 offset-md-3" style="padding:4rem;">
+          <MudPaper Height="600px" Width="80%">
+                <MudCard Style="height:100%">
+                <MudCardContent>
+                    <div class="text-center">
+                        <MudItem>
+                                 <MudImage Src="Images/logo.png" Alt="Slica Logo" Height="200" Width="250" Class="rounded-lg" />
+
+                        </MudItem>
+
+</div>
+                  <EditForm Model="signInUser">
+                       <DataAnnotationsValidator />
+                       <MudItem Class="pa-4">
+                                    <MudTextField Class="black-border"  For="@(() => signInUser.Email)" @bind-Value="@signInUser.Email" Label="Email" InputType="InputType.Text" />
+                       </MudItem>
+                       <MudItem Class="pa-4">
+                                    <MudTextField Class="black-border" For="@(() => signInUser.Password)" @bind-Value="@signInUser.Password" Label="Password" InputType="InputType.Password" />
+                                </MudItem>
+                       <MudItem Class="pa-4">
+                                    <MudButton Disabled="IsLoad" FullWidth="true" ButtonType="ButtonType.Submit" OnClick="OnSignInFormSubmit" Variant="Variant.Filled" Color="Color.Dark">Sign In</MudButton>
+
+                       </MudItem>
+                       <div class="text-center">                              
+                           <MudItem Class="pa-4">
+                                        <MudLink Typo="Typo.overline" Color="Color.Dark" Href="/forgot-password">Forgot your password?</MudLink>
+                                </MudItem>
+                       </div>
+                       <div class="text-center">
+                                    <MudItem Class="pa-4">
+                                        <MudText Typo="Typo.overline"> Don't have a account?  <MudLink Href="/register" Typo="Typo.overline" Style="@($"color:blue !important;")"> Sign Up</MudLink> </MudText>&nbsp;&nbsp;
+                                  
+                                </MudItem>
+                       </div>
+                  </EditForm>
+                </MudCardContent>
+              
+            </MudCard>
+                </MudPaper>
+            </div>
+      
+        </MudPaper>
+    </MudContainer>
+    
+
+</MudPaper>

@@ -1,0 +1,66 @@
+﻿@inject IDialogService DialogService
+
+<MudMenu AnchorOrigin="Origin.BottomRight">
+    <ActivatorContent>
+        @if(string.IsNullOrEmpty(FileName))
+        {
+            <MudIconButton Icon="@Icons.Material.Rounded.Person" Color="Color.Inherit" Class="pa-1 rounded-circle" Style="width: 28px; height: 28px;" Edge="Edge.End" />
+        }
+        else
+        {
+            <MudAvatar Size="Size.Medium" Class="ml-3">
+                <MudImage Src="@(!string.IsNullOrEmpty(FileName)?"Images/Profile/"+FileName:"Images/Profile/noprofile.jpg")"></MudImage>
+            </MudAvatar>
+        }
+
+    </ActivatorContent>
+    <ChildContent>
+            <MudElement HtmlTag="div" Class="d-flex align-center pa-1 mb-2 border-b border-solid" Style="@($"border-color:{Colors.Grey.Lighten2}; width: 260px;")">
+                <MudPaper Elevation="0" Class="pb-2">
+                <MudAvatar Style="background-color:#424242;color:white" Size="Size.Medium" Class="pa-4 ml-2">
+                        <MudText Style="text-transform: uppercase; padding-top: 2px; font-size: .9rem;" Typo="Typo.body1">@badge</MudText>
+                    </MudAvatar>
+                </MudPaper>
+                <MudPaper Elevation="0" Class="pl-2 pb-2">
+                    <MudText Style="text-transform: capitalize;" Typo="Typo.body1">@name</MudText>
+                    <MudText Typo="Typo.caption">@Email</MudText>
+                    </MudPaper>
+            </MudElement>
+            
+        <MudElement HtmlTag="div" Style="width: 300px;">
+                <MudPaper Elevation="0" Class="d-flex  justify-space-between px-2">
+                    <div class="row">
+                        <div class="col-7">
+                    
+                            <MudNavLink Href="/user-profile" Icon="@Icons.Material.Filled.PersonOutline"><MudText Typo="Typo.body2">User Profile</MudText></MudNavLink>
+                        </div>
+                        <div class="col-5" style="padding-left:inherit !important;">
+
+                        <MudNavLink OnClick="OpenDialog" Icon="@Icons.Material.Filled.PowerSettingsNew"><MudText Typo="Typo.body2">Logout</MudText></MudNavLink>
+                        </div>
+                        </div>
+            </MudPaper>
+        </MudElement>
+        </ChildContent>
+    </MudMenu>
+    @code {
+    [Parameter]
+    public string badge { get; set; } = "";
+    [Parameter]
+
+    public string name { get; set; } = "";
+    [Parameter]
+
+    public string Email { get; set; } = "";
+    [Parameter]
+
+    public string FileName { get; set; } = "";
+
+    private void OpenDialog()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        var parameters = new DialogParameters();
+        parameters.Add("Content", "Are you sure you want to logout ?");
+        DialogService.Show<DialogPreview>("Logout", parameters, options);
+    }
+}

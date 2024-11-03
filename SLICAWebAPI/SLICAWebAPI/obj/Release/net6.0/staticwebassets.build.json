@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "BsRwtB4ONGVo+rZQ2k4jdYLZkpM6dnOtrizd6uqlWe8=",
+  "Source": "SLICAWebAPI",
+  "BasePath": "_content/SLICAWebAPI",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

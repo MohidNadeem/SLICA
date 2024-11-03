@@ -1,0 +1,128 @@
+﻿@page "/learning-Letters"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@using MudBlazor
+@using MudBlazor.Services
+@using Blazored.Video;
+@inject NavigationManager navigationManager;
+@inject CookieManagement CookieManager
+@inject ISnackbar Snackbar
+
+<PageTitle>Learning Academy</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+        <div class="row">
+            <div class="col-12">
+                <MudItem>
+                    <div class="row">
+                        <div class="col-6">
+                            <MudText Class="pa-2" Typo="Typo.h6">Learning Academy</MudText>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-2">
+                            <MudSpacer />
+                            <MudItem Style="display:flex;" Class="pa-2">
+@*                                 <MudNavLink Class="pl-lg-4 pl-md-4" Icon="@Icons.Material.Filled.CheckCircle">Test Yourself</MudNavLink>
+ *@                            </MudItem>
+                        </div>
+                    </div>
+                </MudItem>
+            </div>
+            <MudDivider />
+
+        </div>
+    </MudItem>
+    <MudItem>
+        <MudText Class="pa-2 pt-6" Typo="Typo.h6">
+            Welcome to the Learning Alphabets Centre
+        </MudText>
+        <MudText Class="pa-2" Typo="Typo.body1">
+            Learn the American Sign Language for all English Alphabets. Just Hover the Alphabet and Get the Visual.
+        </MudText>
+    </MudItem>
+    <MudItem Style="display:flex; flex-wrap: wrap;">
+
+        @foreach (var index in Enumerable.Range(0, alphabets.Count))
+        {
+            <MudCard Class="alphabet-card" style="position: relative;" @key="index">
+                <div class="card-content">
+                    <h1 class="alphabet-content">@alphabets[index]</h1>
+                </div>
+                <div class="card-content back">
+                    <h1 class="alphabet-content">@GetNextAlphabet(alphabets[index])</h1>
+                </div>
+                <div class="card-description">
+                    <BlazoredVideo @key="@(alphabets[index].ToString())" style="width:250px; height:300; border-radius:8px;" controls="controls" autoplay alt="Not Found">
+                        <source src="@("VideosData/"+alphabets[index].ToString()+".mp4")" type="video/mp4" />
+                    </BlazoredVideo>
+                                    
+                    
+                </div>
+            </MudCard>
+        }
+
+    </MudItem>
+
+</MudContainer>
+<style>
+
+    .alphabet-card {
+        position: relative;
+        width: 250px; /* Set your desired width */
+        height: 300px; /* Set your desired height */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px; /* Adjust the border radius as needed */
+        background-color: dimgrey; /* Set your desired background color */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for a card-like effect */
+        margin: 0.5%;
+        margin-inline-start: 1%;
+        perspective: 1000px; /* Adding perspective for 3D effect */
+        transition: transform 0.5s; /* Adding transition effect */
+    }
+
+    .card-content {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden; /* Hide the back side of the card */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform-style: preserve-3d; /* Ensure proper 3D transformation */
+    }
+
+        .card-content.back {
+            transform: rotateY(180deg) translateZ(1px); /* Translate the back face slightly towards the viewer */
+        }
+
+    .alphabet-card:hover .card-content {
+        transform: rotateY(180deg); /* Flip the entire card on hover */
+    }
+
+    .alphabet-content {
+        font-size: 13rem;
+        color: white;
+        margin: 0;
+        text-align: center;
+    }
+
+    .card-description {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+        text-align: center;
+        color: white;
+    }
+
+    .alphabet-card:hover .card-description {
+        opacity: 1;
+    }
+
+</style>
+

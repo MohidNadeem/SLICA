@@ -1,0 +1,117 @@
+﻿@inherits LayoutComponentBase
+@inject IDialogService DialogService
+@inject NavigationManager NavigationManager
+@using Newtonsoft.Json;
+@inject CookieManagement CookieManager
+<MudThemeProvider Theme="MyCustomTheme" />
+<MudSnackbarProvider />
+<MudDialogProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="1">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@((e) => DrawerToggle())" />
+        <MudSpacer />
+@*         <Notification />
+ *@        <UserInitials FileName="@fileName" badge="@badge" Email="@Email" name="@name"></UserInitials>
+
+    </MudAppBar>
+    <MudDrawer @bind-Open="_drawerOpen" ClipMode="DrawerClipMode.Never" Elevation="1" Variant="DrawerVariant.Mini">
+        <NavMenu />
+    </MudDrawer>
+    <MudMainContent Class="mb-4">
+        @Body
+    </MudMainContent>
+</MudLayout>
+@code {
+    bool _drawerOpen = false;
+    string badge = "";
+    string name = "";
+    string Email = "";
+    string fileName = "";
+
+    private UserModel sessionModel = new UserModel();
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            sessionModel = await CookieManager.GetCookie<UserModel>("LoggedInUserInfo");
+            if (sessionModel == null)
+            {
+                NavigationManager.NavigateTo("/");
+            }
+            else
+            {
+                if (sessionModel.APIKey != null)
+                {
+                    string requestBody = JsonConvert.SerializeObject(new
+                    {
+                        UserID = sessionModel.Id
+                    });
+                    var response = await CommonMethods.PostDataAsync(requestBody.ToString(), sessionModel!.APIKey, sessionModel!.SessionKey, "/ACC/ValidateSession");
+
+                    dynamic responseJson = JsonConvert.DeserializeObject(response);
+
+
+
+                    int returnStatus = responseJson!["status"];
+                    string returnMessage = responseJson["message"];
+
+
+                    if (returnStatus != 200)
+                    {
+                        CookieManager.DeleteCookie("LoggedInUserInfo");
+                        NavigationManager.NavigateTo("/");
+
+                    }
+                    else
+                    {
+                        bool emailVerificationStatus = (Boolean)responseJson["emailverification"];
+                        sessionModel.IsEmailVerified = emailVerificationStatus;
+                        await CookieManager.SetCookie("LoggedInUserInfo", sessionModel);
+                        if (sessionModel.IsEmailVerified != true)
+                        {
+                            var parameters = new DialogParameters();
+                            var options = new MudBlazor.DialogOptions() { FullWidth = true, MaxWidth = MaxWidth.Medium, CloseOnEscapeKey = false, DisableBackdropClick = true };
+                            DialogService.Show<EmailVerificationDialog>("Simple Dialog", parameters, options);
+                        }
+                       
+
+
+                            name = sessionModel.FirstName + " " + sessionModel.LastName;
+                            Email = sessionModel.Email;
+                            badge = sessionModel.FirstName.ToCharArray()[0].ToString() + sessionModel.LastName.ToCharArray()[0];
+                            fileName = sessionModel.FileName;
+
+                            StateHasChanged();
+                        
+                    }
+                }
+            }
+        }
+    }
+    void DrawerToggle()
+    {
+        _drawerOpen = !_drawerOpen;
+    }
+    MudTheme MyCustomTheme = new MudTheme()
+        {
+            Palette = new PaletteLight()
+            {
+                Primary = Colors.Shades.Black,
+                Divider = Colors.Shades.Black
+            },
+            PaletteDark = new PaletteDark()
+            {
+                Primary = Colors.Shades.Black,
+                Divider =Colors.Shades.Black,
+            },
+
+        };
+
+}
+<style>
+    .mud-appbar {
+        background-color: black !important;
+    }
+
+</style>

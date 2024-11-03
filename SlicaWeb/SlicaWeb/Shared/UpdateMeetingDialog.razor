@@ -1,0 +1,127 @@
+﻿@using SlicaWeb.Models
+@using Newtonsoft.Json;
+@inject CookieManagement CookieManager
+@inject ISnackbar Snackbar
+
+<MudDialog>
+
+    <DialogContent>
+        <MudDivider Style="margin-top:-1rem;" />
+        <MudItem>
+            <div class="row">
+                <div class="col-12">
+                    <EditForm EditContext="addmeeingContext">
+                        <DataAnnotationsValidator />
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+
+                                <MudItem Class="pa-4">
+                                    <MudTextField Class="black-border" For="@(() => addmeeting.Title)" @bind-Value="@addmeeting.Title" Label="Meeting Title" InputType="InputType.Text" />
+                                </MudItem>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+
+                                <MudItem Class="pa-4">
+
+                                    <MudTextField T="DateTime?" Format="s" Class="black-border" For="@(() => addmeeting.StartDateTime)" @bind-Value="@addmeeting.StartDateTime" Label="Meeting Start Time" InputType="InputType.DateTimeLocal" />
+                                </MudItem>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12 col-xl-12">
+
+                                <MudItem Class="pa-4">
+                                    <MudSelect T="int" Label="Duration" For="@(() => addmeeting.Duration)" @bind-Value="@addmeeting.Duration" AnchorOrigin="Origin.BottomCenter">
+                                        <MudSelectItem Value="@(15)">15 minutes</MudSelectItem>
+                                        <MudSelectItem Value="@(30)">30 minutes</MudSelectItem>
+                                        <MudSelectItem Value="@(45)">45 minutes</MudSelectItem>
+                                        <MudSelectItem Value="@(60)">60 minutes</MudSelectItem>
+
+                                    </MudSelect>
+                                </MudItem>
+                            </div>
+                        </div>
+                    </EditForm>
+                </div>
+
+            </div>
+        </MudItem>
+
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Cancel">Cancel</MudButton>
+        <MudButton Color="Color.Primary" OnClick="Submit"> Update</MudButton>
+    </DialogActions>
+</MudDialog>
+@code
+{
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+
+    [Parameter]
+    public MeetingModel meetingParameter { get; set; } = new MeetingModel();
+    [Parameter]
+    public EventCallback<int> OnUpdate { get; set; }
+
+    public MeetingModel addmeeting = new MeetingModel();
+    EditContext addmeeingContext;
+    protected override void OnParametersSet()
+    {
+        if(meetingParameter != null)
+        {
+            addmeeting = meetingParameter;
+            addmeeingContext = new EditContext(addmeeting);
+
+        }
+    }
+    async Task Submit()
+    {
+        try
+        {
+            var sessionModel = await CookieManager.GetCookie<UserModel>("LoggedInUserInfo");
+            addmeeingContext.Validate();
+            List<string> validateParams = new List<string>
+            {
+                  "Title","StartDateTime","Duration"
+            };
+            if (!CommonMethods.ValidateAttributes(addmeeting, validateParams))
+            {
+                return;
+            }
+
+            var requestBody = JsonConvert.SerializeObject(new
+            {
+                Title = addmeeting.Title,
+                Duration = addmeeting.Duration,
+                StartDateTime = addmeeting.StartDateTime,
+                ID = addmeeting.Id,
+            });
+
+            var jsonStr = await CommonMethods.PostDataAsync(requestBody.ToString(), sessionModel.APIKey, sessionModel.SessionKey, "/MEET/UpdateMeeting");
+            dynamic result = JsonConvert.DeserializeObject(jsonStr);
+            int returnStatus = result["status"];
+            string returnMessage = result["message"];
+            if (returnStatus == 200)
+            {
+                Snackbar.Add(returnMessage, Severity.Success);
+                MudDialog.Close(DialogResult.Ok(true));
+                await OnUpdate.InvokeAsync(1);
+            }
+            else
+            {
+                Snackbar.Add(returnMessage, Severity.Error);
+                MudDialog.Close(DialogResult.Ok(true));
+            }
+
+        }
+        catch (Exception e)
+        {
+            await CommonMethods.LogExceptionAsync(e, new UserModel());
+        }
+        finally
+        {
+            addmeeting = new MeetingModel();
+
+        }
+    }
+    void Cancel() => MudDialog.Cancel();
+}

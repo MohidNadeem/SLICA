@@ -1,0 +1,92 @@
+﻿@page "/connection-requests"
+@inject IDialogService DialogService
+@inject ISnackbar Snackbar
+@inject CookieManagement CookieManager
+@inject NavigationManager NavigationManager
+@inject NotificationService NotificationManager
+
+<PageTitle>Connection Requests</PageTitle>
+<MudContainer MaxWidth="MaxWidth.ExtraExtraLarge">
+    <MudItem>
+        <div class="row">
+            <div class="col-12">
+                <MudItem>
+                    <div class="row">
+                        <div class="col-6">
+                            <MudText Class="pa-2" Typo="Typo.h6">Connection Requests</MudText>
+                        </div>
+                        <div class="col-4">
+                        </div>
+                        <div class="col-2">
+                            <MudSpacer />
+                            <MudItem Style="display:flex;" Class="pa-2">
+                                <MudNavLink Class="pl-lg-4 pl-md-4" Icon="@Icons.Material.Filled.Send" Href="/send-requests">Send Request</MudNavLink>
+                            </MudItem>
+                        </div>
+                    </div>
+                </MudItem>
+            </div>
+            <MudDivider />
+
+        </div>
+    </MudItem>
+    <MudItem>
+        <MudText Class="pa-2 pt-6" Typo="Typo.h6">
+            Welcome to the Connection Requests
+        </MudText>
+        <MudText Class="pa-2" Typo="Typo.body1">
+            Here, you can view and manage all your incoming connection request, Accept or reject requests to grow your network. Stay connected and in control of your network.
+
+
+        </MudText>
+    </MudItem>
+    
+
+    <MudItem Class="mt-2" xs="12" sm="10" md="10">
+
+        <MudDataGrid Items="@requestDetails" SortMode="SortMode.Multiple" Filterable="true" QuickFilter="@_quickFilter"
+                     Hideable="false">
+            <NoRecordsContent>
+                <MudText Typo="Typo.caption"> No Connection Requests.</MudText>
+            </NoRecordsContent>
+            <ToolBarContent>
+                <MudText Typo="Typo.h6">Connection Requests</MudText>
+                <MudSpacer />
+                <MudTextField @bind-Value="_searchString" Placeholder="Search" Adornment="Adornment.Start" Immediate="true"
+                              AdornmentIcon="@Icons.Material.Filled.Search" IconSize="Size.Medium" Class="mt-0"></MudTextField>
+            </ToolBarContent>
+            <Columns>
+                <PropertyColumn Property="x => x.SNo" Title="SNo" />
+                <TemplateColumn Title="Name">
+                    <CellTemplate>
+                        <MudStack Row>
+                            <MudAvatar>
+                                <MudImage Src="@(!string.IsNullOrEmpty(context.Item.FileName)?"Images/Profile/"+context.Item.FileName:"Images/Profile/noprofile.jpg")"></MudImage>
+                            </MudAvatar>
+                            <MudLink Color="Color.Dark" OnClick="@(()=>OpenBioDialog(context.Item.Bio,context.Item.Name,context.Item.FileName))" Underline="Underline.None">@context.Item.Name</MudLink>
+
+                        </MudStack>
+                    </CellTemplate>
+                </TemplateColumn>                <PropertyColumn Property="x => x.Email" />
+                <PropertyColumn Format="dd-MMM-yyyy HH:mm" Property="x => x.ReceivedDate" />
+                <TemplateColumn Title="Action" CellClass="d-flex justify-start">
+                    <CellTemplate>
+
+                            <MudIconButton Size="Size.Small" Icon="@Icons.Material.Filled.Check" Color="Color.Dark" OnClick="@(()=>UpdateRequest(context.Item,1))" aria-label="Accept"></MudIconButton>
+                            <MudIconButton Size="Size.Small" Icon="@Icons.Material.Filled.Clear" Color="Color.Dark" OnClick="@(()=>UpdateRequest(context.Item,2))" aria-label="Reject"></MudIconButton>
+
+                    </CellTemplate>
+                </TemplateColumn>
+            </Columns>
+            <PagerContent>
+                <MudDataGridPager T="RequestModel" />
+            </PagerContent>
+        </MudDataGrid>
+
+    </MudItem>
+
+
+</MudContainer>
+
+
+
